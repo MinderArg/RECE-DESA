@@ -2,7 +2,7 @@
 
 <html>
 <body> 
-<h2>Hello Mundo!</h2>
+<h2>Hello Lucas Ponce!</h2>
 <p>Hora:   <c:out value="${model.now}"/></p>
 </body>
 </html>

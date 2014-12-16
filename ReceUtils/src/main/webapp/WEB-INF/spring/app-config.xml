@@ -12,7 +12,7 @@
     </bean>
 
     <!-- Scans the classpath of this application for @Components to deploy as beans -->
-    <context:component-scan base-package="generator.web" />
+    <context:component-scan base-package="com.minder.rece.utils.web" />
 
     <!-- Configures the @Controller programming model -->
     <mvc:annotation-driven/>

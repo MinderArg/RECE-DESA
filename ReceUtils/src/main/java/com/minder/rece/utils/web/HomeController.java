@@ -1,4 +1,4 @@
-package generator.web;
+package com.minder.rece.utils.web;
 
 import java.io.IOException;
 import java.util.Date;
