@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.pdfbox.io.IOUtils;
 import org.springframework.stereotype.Controller;
@@ -28,12 +29,17 @@ import com.minder.rece.utils.tools.Tools;
 @Controller
 public class QRController {
 	
-	private String filename = "tmp\\QR_Code.JPG";
+	private String defaultFilename = "tmp\\QR_Code";
+	private String fileExt = "png";
+	
+	private String getFilename(HttpSession s){
+		return defaultFilename+s.getId()+"."+fileExt;
+	}
 	
 	@RequestMapping(value="/qrgen.htm", method=RequestMethod.GET)
     public ModelAndView handleGetRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		System.out.println("get");
+		
     	String now = (new Date()).toString();
 
         Map<String, Object> myModel = new HashMap<String, Object>();
@@ -52,7 +58,7 @@ public class QRController {
 	MECard meCard)
             throws ServletException, IOException {
 
-		System.out.println("post");
+		
     	String now = (new Date()).toString();
 
         Map<String, Object> myModel = new HashMap<String, Object>();
@@ -60,6 +66,7 @@ public class QRController {
         myModel.put("util", "QRGenerator");
         myModel.put("showQR", true);
         
+        String filename = getFilename(request.getSession());
 	    try {
 	    	File dir = new File("tmp");
 	    	dir.mkdir();
@@ -82,8 +89,10 @@ public class QRController {
     }
 	
 	@RequestMapping(value = "/qr")
-	public void photo(HttpServletResponse response) throws IOException {
-		
+	public void getQRImage(HttpServletResponse response, HttpServletRequest request) throws IOException {
+
+        String filename = getFilename(request.getSession());
+        
 	    File img = new File(filename);
 	    boolean isHotlink = !img.exists();
 	    if(isHotlink){
