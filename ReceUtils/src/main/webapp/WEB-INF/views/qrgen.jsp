@@ -26,11 +26,7 @@
 	<img src="qr"/>
 </c:if>
 
-<div>
-<a href="signer.htm">SIGNER</a> 
-<br/> 
-<a href="qrgen.htm">QR GENERATOR</a>
-</div>
+<%@ include file="/WEB-INF/views/links.jsp" %>
 
 </body>
 </html>

@@ -63,15 +63,8 @@ public class QRController {
 	    try {
 	    	File dir = new File("tmp");
 	    	dir.mkdir();
-	    	
-	    	String data = "MECARD:";
-	    	data += "N:"+meCard.getName()+";";
-	    	data += "TEL:"+meCard.getTel()+";";
-	    	data += "NOTE:"+meCard.getNote()+";";
-	    	data += "EMAIL:"+meCard.getEmail()+";";
-	    	data += ";";
 
-	    	QRGenerator.generateQRCode(filename, data);
+	    	QRGenerator.generateMECardQRCode(filename, meCard);
 	    	
 	    	//Tools.deleteFile(dir);
 				

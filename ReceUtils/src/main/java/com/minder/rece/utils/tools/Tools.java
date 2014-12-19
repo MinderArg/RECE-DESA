@@ -1,6 +1,10 @@
 package com.minder.rece.utils.tools;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class Tools {
 	public static void deleteFile(File tempFile) {
@@ -19,5 +23,26 @@ public class Tools {
         catch(Throwable t)
         {
         }
+    }
+	
+	//Uploads a file and return its relative path.
+	public static String uploadFile(String name, String ext, byte[] bytes) throws IOException {
+
+		 
+        // Creating the directory to store file
+		String directory = "tmp" + File.separator + "tmpFiles";
+        File dir = new File(directory);
+        if (!dir.exists())
+            dir.mkdirs();
+
+        // Create the file on server
+        File serverFile = new File(dir.getAbsolutePath()
+                + File.separator + name+"."+ext);
+        BufferedOutputStream stream = new BufferedOutputStream(
+                new FileOutputStream(serverFile));
+        stream.write(bytes);
+        stream.close();
+        
+        return directory+File.separator+name+"."+ext;
     }
 }
