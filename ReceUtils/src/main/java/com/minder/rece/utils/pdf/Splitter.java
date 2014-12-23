@@ -1,4 +1,4 @@
-package com.minder.rece.utils.splitter.services;
+package com.minder.rece.utils.pdf;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -9,14 +9,18 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.util.PDFTextStripper;
 
-import com.minder.rece.utils.splitter.objects.RecePDF;
-
 public class Splitter {
 	
 	public static void splitDocument(RecePDF doc) {	
-		if (doc.getDoublePage())
-			cutPages(doc);
+		System.out.println("-----------Iniciando formateo del documento.-----------");
+		if (doc.getDoublePage()){
+			System.out.println("-----------Iniciando corte del documento.-----------");
+			cutPages(doc);}
+
+		System.out.println("-----------Iniciando spliteo del documento.-----------");
 		splitCUIL(doc);
+
+		System.out.println("-----------Fin del formateo del documento.-----------");
 	}
 	
 	/**
@@ -84,6 +88,9 @@ public class Splitter {
 	private static void splitCUIL(RecePDF doc) {
 		int cantDoc = 0, firstCUILPage = 0;
 		String prevCUIL = "-";
+		
+		System.out.println("Cantidad de páginas del documento: "+doc.getNumberOfPages());
+		
 		for (int actPage=1; actPage<=doc.getNumberOfPages(); actPage++) {
 			String actCUIL = getCUIL(doc, actPage);
 			if ( !actCUIL.equals(prevCUIL) ) {

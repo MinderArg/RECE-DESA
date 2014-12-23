@@ -1,5 +1,6 @@
-package com.minder.rece.utils.splitter.objects;
+package com.minder.rece.utils.pdf;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.apache.pdfbox.exceptions.*;
@@ -26,6 +27,10 @@ public class RecePDF {
 			//TODO: Use Log
 			System.out.println("Error: Invalid File Path.");
 		}
+
+		System.out.println(File.separator);
+		System.out.println(path);
+		
 		String[] parsed = path.split("/");
 		if ( parsed.length >= 1 ) {
 			String[] file = parsed[parsed.length-1].split("\\.");
@@ -124,5 +129,9 @@ public class RecePDF {
 
 	public String getPathWithTag(String tag) {
 		return path.replace(name, name + tag);
+	}
+
+	public void splitDocument() {
+		Splitter.splitDocument(this);
 	}
 }

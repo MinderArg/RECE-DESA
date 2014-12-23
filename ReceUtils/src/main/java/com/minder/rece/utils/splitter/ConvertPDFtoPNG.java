@@ -1,9 +1,9 @@
-package com.minder.rece.utils.splitter.services;
+package com.minder.rece.utils.splitter;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import com.minder.rece.utils.splitter.objects.RecePDF;
+import com.minder.rece.utils.pdf.RecePDF;
 
 /**
  * Servicio que se encarga de convertir un documento PDF en imágenes PNG.

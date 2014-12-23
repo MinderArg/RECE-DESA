@@ -1,10 +1,9 @@
-package com.minder.rece.utils.splitter.objects;
+package com.minder.rece.utils.pdf;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.minder.rece.utils.splitter.services.FillFields;
-import com.minder.rece.utils.splitter.services.Splitter;
+import com.minder.rece.utils.splitter.FillFields;
 
 @SuppressWarnings("unused")
 public class Test {
@@ -28,7 +27,7 @@ public class Test {
 	private static RecePDF pdf;
 
 	public static void main(String[] args) {
-		pdf = new RecePDF(FILE_S1);
+		pdf = new RecePDF("Liquidacion560Recibos.pdf");
 		
 		testSplitDocument();
 		//testFillFields("map");

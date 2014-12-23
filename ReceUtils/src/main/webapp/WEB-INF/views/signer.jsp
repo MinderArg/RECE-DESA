@@ -21,10 +21,14 @@
  <c:if test="${not empty document.name}">
 	<form method="POST" action="documentAction.htm" enctype="multipart/form-data">
 		<fieldset>
-		        <input type="submit" name="showSignature" value="Ver firma"/>
+				<legend>Opciones del recibo</legend>
+		        <input type="text" name="docName" value="${document.name}" disabled/><br/>
+		        <input type="submit" name="showSignature" value="Ver firma"/><br/>
+		        <input type="submit" name="splitDocument" value="Cortar recibos"/>
+		        <label for="dobleHoja">Dos recibos por hoja?</label> 
+		        <input type="checkbox" name="dobleHoja"><br/>
 		        
-		        <input type="hidden" name="name" value="${document.name}"/>
-		        <input type="hidden" name="name" value="${document.name}"/>
+<%-- 		        <input type="text" name="incluNone" value="${document.name}"/> --%>
 		</fieldset>
 	</form>
 	

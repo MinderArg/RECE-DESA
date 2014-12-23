@@ -21,8 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.minder.rece.utils.qrgen.MECard;
-import com.minder.rece.utils.qrgen.QRGenerator;
+import qr.MECard;
+import qr.QRGenerator;
+
 import com.minder.rece.utils.tools.Tools;
 
 

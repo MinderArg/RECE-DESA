@@ -1,4 +1,4 @@
-package com.minder.rece.utils.splitter.services;
+package com.minder.rece.utils.splitter;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.graphics.xobject.PDJpeg;
 
-import com.minder.rece.utils.splitter.objects.RecePDF;
+import com.minder.rece.utils.pdf.RecePDF;
 
 @SuppressWarnings("unused")
 public class InsertImage {

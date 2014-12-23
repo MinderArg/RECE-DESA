@@ -1,7 +1,6 @@
 package com.minder.rece.utils.web;
 
 import java.io.IOException;
-import java.security.cert.X509Certificate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.minder.rece.utils.signer.SignatureManager;
+import com.minder.rece.utils.certificate.SignatureManager;
+import com.minder.rece.utils.pdf.RecePDF;
 import com.minder.rece.utils.tools.Tools;
 
 @Controller
@@ -75,7 +75,7 @@ public class SignerController {
 		if (!file.isEmpty()) {
 			try {
 
-				filePath = Tools.uploadFile(name, "pdf", file.getBytes());
+				filePath = Tools.uploadFile("tmp", name+"_"+request.getSession().getId(), "pdf", file.getBytes());
 
 				document.put("name", name);
 			} catch (Exception e) {
@@ -93,28 +93,16 @@ public class SignerController {
 	}
 
 	@RequestMapping(value = "/documentAction.htm", method = RequestMethod.POST, params="showSignature")
-	ModelAndView showSignatureHandler(@RequestParam("name") String name, @RequestParam("file") MultipartFile file) {
+	ModelAndView showSignatureHandler(HttpServletRequest request) {
 
-		Map<String, Object> document = new HashMap<String, Object>();
+		Map<String, Object> document = (Map<String, Object>) request.getSession().getAttribute("document");
 		
-		// Upload fle
-		String filePath = null;
-		if (!file.isEmpty()) {
-			try {
-
-				filePath = Tools.uploadFile(name, "pdf", file.getBytes());
-
-				document.put("name", name);
-			} catch (Exception e) {
-				System.out.println("You failed to upload " + name + " => " + e.getMessage());
-			}
-		} else {
-			System.out.println("You failed to upload " + name + " because the file was empty.");
-		}
+		String filePath = document.get("filepath").toString();
 		// Show signature
 		String info = "";
 		try {
-			info = SignatureManager.getSignatureInfoFromFile("asd", filePath);
+			//"asd" is the key
+			info = SignatureManager.getSignatureInfoFromFile("asd", new RecePDF(filePath));
 		} catch (Exception e) {
 			info = "Problem getting signature info.";
 
@@ -124,6 +112,23 @@ public class SignerController {
 		
 		document.put("sigInfo", info.replace("\n", "<br/>"));
 
-		return new ModelAndView("signer", "document", document);
+		return new ModelAndView("signer");
+	}
+
+	@RequestMapping(value = "/documentAction.htm", method = RequestMethod.POST, params="splitDocument")
+	ModelAndView splitDocumentHandler(HttpServletRequest request, @RequestParam(required=false, value="dobleHoja") Boolean dobleHoja) {
+
+		Map<String, Object> document = (Map<String, Object>) request.getSession().getAttribute("document");
+		
+		String filePath = document.get("filepath").toString();
+		// Split document
+
+		if(dobleHoja==null) dobleHoja=false;
+
+		RecePDF doc = new RecePDF(filePath, dobleHoja);
+		doc.splitDocument();
+		doc.closeDocument();
+
+		return new ModelAndView("signer");
 	}
 }

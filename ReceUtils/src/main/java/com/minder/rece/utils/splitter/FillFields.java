@@ -1,4 +1,4 @@
-package com.minder.rece.utils.splitter.services;
+package com.minder.rece.utils.splitter;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -9,7 +9,7 @@ import java.util.Set;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 
-import com.minder.rece.utils.splitter.objects.RecePDF;
+import com.minder.rece.utils.pdf.RecePDF;
 
 public class FillFields {
 	
