@@ -5,4 +5,6 @@
 <a href="signer.htm">SIGNER</a> 
 <br/> 
 <a href="qrgen.htm">QR GENERATOR</a>
+<br/> 
+<a href="splitter.htm">SPLITTER</a>
 </div>

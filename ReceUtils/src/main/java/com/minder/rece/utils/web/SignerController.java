@@ -120,25 +120,6 @@ public class SignerController {
 		return new ModelAndView("signer");
 	}
 
-	@RequestMapping(value = "/documentAction.htm", method = RequestMethod.POST, params = "splitDocument")
-	ModelAndView splitDocumentHandler(HttpServletRequest request,
-			@RequestParam(required = false, value = "dobleHoja") Boolean dobleHoja) {
-
-		Map<String, Object> document = (Map<String, Object>) request.getSession().getAttribute("document");
-
-		String filePath = document.get("filepath").toString();
-		// Split document
-
-		if (dobleHoja == null)
-			dobleHoja = false;
-
-		RecePDF doc = new RecePDF(filePath, dobleHoja);
-		doc.splitDocument();
-		doc.closeDocument();
-
-		return new ModelAndView("signer");
-	}
-
 	@RequestMapping(value = "/documentAction.htm", method = RequestMethod.POST, params = "signDocument")
 	ModelAndView signDocumentHandler(HttpServletRequest request) {
 

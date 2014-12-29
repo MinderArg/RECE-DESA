@@ -24,9 +24,6 @@
 				<legend>Opciones del recibo</legend>
 		        <input type="text" name="docName" value="${document.name}" disabled/><br/>
 		        <input type="submit" name="showSignature" value="Ver firma"/><br/>
-		        <input type="submit" name="splitDocument" value="Cortar recibos"/>
-		        <label for="dobleHoja">Dos recibos por hoja?</label> 
-		        <input type="checkbox" name="dobleHoja"><br/>
 		        <input type="submit" name="signDocument" value="Firmar"/><br/>
 		        
 <%-- 		        <input type="text" name="incluNone" value="${document.name}"/> --%>
