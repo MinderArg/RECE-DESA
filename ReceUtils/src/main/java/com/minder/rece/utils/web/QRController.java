@@ -1,6 +1,5 @@
 package com.minder.rece.utils.web;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,92 +20,90 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import qr.MECard;
-import qr.QRGenerator;
-
+import com.minder.rece.utils.qr.MECard;
+import com.minder.rece.utils.qr.QRGenerator;
 import com.minder.rece.utils.tools.Tools;
-
 
 @Controller
 public class QRController {
-	
+
 	private String defaultFilename = "tmp\\QR_Code";
 	private String fileExt = "png";
-	
-	private String getFilename(HttpSession s){
-		return defaultFilename+s.getId()+"."+fileExt;
+
+	private String getFilename(HttpSession s) {
+		return defaultFilename + s.getId() + "." + fileExt;
 	}
-	
-	@RequestMapping(value="/qrgen.htm", method=RequestMethod.GET)
-    public ModelAndView handleGetRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-		
-    	String now = (new Date()).toString();
 
-        Map<String, Object> myModel = new HashMap<String, Object>();
-        myModel.put("now", now);
-        myModel.put("util", "QRGenerator");
-        myModel.put("showQR", false);
+	@RequestMapping(value = "/qrgen.htm", method = RequestMethod.GET)
+	public ModelAndView handleGetRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        ModelAndView model = new ModelAndView("qrgen");
-        model.addObject("model", myModel);
-        model.addObject("command", new MECard());
-        return model;
-    }
-	
-	@RequestMapping(value="/qrgen.htm", method=RequestMethod.POST)
-    public ModelAndView handlePostRequest(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("command")
-	MECard meCard)
-            throws ServletException, IOException {
+		String now = (new Date()).toString();
 
-		
-    	String now = (new Date()).toString();
+		Map<String, Object> myModel = new HashMap<String, Object>();
+		myModel.put("now", now);
+		myModel.put("util", "QRGenerator");
+		myModel.put("showQR", false);
 
-        Map<String, Object> myModel = new HashMap<String, Object>();
-        myModel.put("now", now);
-        myModel.put("util", "QRGenerator");
-        myModel.put("showQR", true);
-        
-        String filename = getFilename(request.getSession());
-	    try {
-	    	File dir = new File("tmp");
-	    	dir.mkdir();
+		ModelAndView model = new ModelAndView("qrgen");
+		model.addObject("model", myModel);
+		model.addObject("command", new MECard());
+		return model;
+	}
 
-	    	QRGenerator.generateMECardQRCode(filename, meCard);
-	    	
-	    	//Tools.deleteFile(dir);
-				
+	@RequestMapping(value = "/qrgen.htm", method = RequestMethod.POST)
+	public ModelAndView handlePostRequest(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute("command") MECard meCard)
+			throws ServletException, IOException {
+
+		String now = (new Date()).toString();
+
+		Map<String, Object> myModel = new HashMap<String, Object>();
+		myModel.put("now", now);
+		myModel.put("util", "QRGenerator");
+		myModel.put("showQR", true);
+
+		String filename = getFilename(request.getSession());
+		try {
+			File dir = new File("tmp");
+			dir.mkdir();
+
+			QRGenerator.generateMECardQRCode(filename, meCard);
+
+			// Tools.deleteFile(dir);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("catch3");
 		}
 
+		ModelAndView model = new ModelAndView("qrgen");
+		model.addObject("model", myModel);
+		model.addObject("command", meCard);
 
-        ModelAndView model = new ModelAndView("qrgen");
-        model.addObject("model", myModel);
-        model.addObject("command", meCard);
-	    
-        return model;
-    }
-	
+		return model;
+	}
+
 	@RequestMapping(value = "/qr")
-	public void getQRImage(HttpServletResponse response, HttpServletRequest request) throws IOException {
+	public void getQRImage(HttpServletResponse response, HttpServletRequest request)
+			throws IOException {
 
-        String filename = getFilename(request.getSession());
-        
-	    File img = new File(filename);
-	    boolean isHotlink = !img.exists();
-	    if(isHotlink){
-	    	img = new File("NoHotlinking.png");
-	    }
+		String filename = getFilename(request.getSession());
 
-	    response.setContentType("image/png");
-	    InputStream in =  new FileInputStream(img);
-	    
-	    IOUtils.copy(in, response.getOutputStream());
-	    in.close();
-	    
-	    if(!isHotlink)Tools.deleteFile(img);
+		File img = new File(filename);
+		boolean isHotlink = !img.exists();
+		if (isHotlink) {
+			img = new File("NoHotlinking.png");
+		}
+
+		response.setContentType("image/png");
+		InputStream in = new FileInputStream(img);
+
+		IOUtils.copy(in, response.getOutputStream());
+		in.close();
+
+		if (!isHotlink)
+			Tools.deleteFile(img);
 	}
 
 }

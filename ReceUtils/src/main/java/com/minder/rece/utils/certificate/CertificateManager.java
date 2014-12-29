@@ -34,9 +34,9 @@ import sun.security.x509.X500Name;
 import sun.security.x509.X509CertImpl;
 import sun.security.x509.X509CertInfo;
 
-public class SignatureManager {
+public class CertificateManager {
 
-	private SignatureManager() {
+	private CertificateManager() {
 	}
 
 	public static String decryptPassword(String encryptedPassword) {
@@ -61,15 +61,13 @@ public class SignatureManager {
 	 */
 	public static X509Certificate generateCertificate(String dn, int days)
 			throws GeneralSecurityException, IOException {
-		
+
 		String algorithm = "SHA1withRSA";
 
 		KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
 		kpg.initialize(2048);
 		KeyPair pair = kpg.genKeyPair();
-		
-		
-		
+
 		PrivateKey privkey = pair.getPrivate();
 		X509CertInfo info = new X509CertInfo();
 		Date from = new Date();
@@ -133,16 +131,19 @@ public class SignatureManager {
 						ret += "\nCertificate found";
 						ret += "\nName=" + cert.getDictionaryObject(COSName.NAME);
 						ret += "\nModified=" + cert.getDictionaryObject(COSName.getPDFName("M"));
-						COSName subFilter = (COSName) cert.getDictionaryObject(COSName.getPDFName("SubFilter"));
+						COSName subFilter = (COSName) cert.getDictionaryObject(COSName
+								.getPDFName("SubFilter"));
 
 						if (subFilter != null) {
 							if (subFilter.getName().equals("adbe.x509.rsa_sha1")) {
 
-								COSString certString = (COSString) cert.getDictionaryObject(COSName.getPDFName("Cert"));
+								COSString certString = (COSString) cert.getDictionaryObject(COSName
+										.getPDFName("Cert"));
 								byte[] certData = certString.getBytes();
 								CertificateFactory factory = CertificateFactory.getInstance("X.509");
 								ByteArrayInputStream certStream = new ByteArrayInputStream(certData);
-								Collection<? extends Certificate> certs = factory.generateCertificates(certStream);
+								Collection<? extends Certificate> certs = factory
+										.generateCertificates(certStream);
 								ret += "\ncerts=" + certs;
 
 							} else if (subFilter.getName().equals("adbe.pkcs7.sha1")) {
@@ -151,7 +152,8 @@ public class SignatureManager {
 								byte[] certData = certString.getBytes();
 								CertificateFactory factory = CertificateFactory.getInstance("X.509");
 								ByteArrayInputStream certStream = new ByteArrayInputStream(certData);
-								Collection<? extends Certificate> certs = factory.generateCertificates(certStream);
+								Collection<? extends Certificate> certs = factory
+										.generateCertificates(certStream);
 								ret += "\ncerts=" + certs;
 
 							} else {
