@@ -27,7 +27,7 @@ public class SplitterTest {
 	public static void main(String[] args) {
 		pdf = new RecePDF("test/Liquidacion560Recibos.pdf", true);
 
-		testSplitDocument();
+		//testSplitDocument();
 		// testFillFields("map");
 
 		pdf.closeDocument();

@@ -3,7 +3,7 @@
 
 <html>
 <body> 
-<h2>QR Generator</h2>
+<h2>Signer</h2>
 <p>Hora:        <c:out value="${model.now}"/></p>
 <p>Util:        <c:out value="${model.util}"/></p>
 
@@ -27,6 +27,7 @@
 		        <input type="submit" name="splitDocument" value="Cortar recibos"/>
 		        <label for="dobleHoja">Dos recibos por hoja?</label> 
 		        <input type="checkbox" name="dobleHoja"><br/>
+		        <input type="submit" name="signDocument" value="Firmar"/><br/>
 		        
 <%-- 		        <input type="text" name="incluNone" value="${document.name}"/> --%>
 		</fieldset>

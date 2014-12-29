@@ -1,5 +1,6 @@
 package com.minder.rece.utils.web;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.minder.rece.utils.certificate.Encrypter;
 import com.minder.rece.utils.pdf.RecePDF;
 import com.minder.rece.utils.tools.Tools;
 
@@ -76,8 +78,8 @@ public class SignerController {
 		if (!file.isEmpty()) {
 			try {
 
-				filePath = Tools.uploadFile("tmp", name + "_" + request.getSession().getId(), "pdf",
-						file.getBytes());
+				filePath = Tools.uploadFile("tmp" + File.separator + "tmpFiles", name + "_"
+						+ request.getSession().getId(), "pdf", file.getBytes());
 
 				document.put("name", name);
 			} catch (Exception e) {
@@ -104,7 +106,7 @@ public class SignerController {
 		String info = "Problem getting signature info.";
 		try {
 			// "asd" is the key
-			info = (new RecePDF(filePath)).getSignatureInfo("asd");
+			info = (new RecePDF("tmp/tmpFiles/signed.pdf")).getSignatureInfo(Encrypter.decrypt("[rtf_hzi"));
 			// info = CertificateManager.getSignatureInfoFromFile("asd", new
 			// RecePDF(filePath));
 		} catch (Exception e) {
@@ -132,6 +134,22 @@ public class SignerController {
 
 		RecePDF doc = new RecePDF(filePath, dobleHoja);
 		doc.splitDocument();
+		doc.closeDocument();
+
+		return new ModelAndView("signer");
+	}
+
+	@RequestMapping(value = "/documentAction.htm", method = RequestMethod.POST, params = "signDocument")
+	ModelAndView signDocumentHandler(HttpServletRequest request) {
+
+		Map<String, Object> document = (Map<String, Object>) request.getSession().getAttribute("document");
+
+		String filePath = document.get("filepath").toString();
+		// Sign document
+
+		RecePDF doc = new RecePDF(filePath);
+		doc.sign("Rodrigo Moline", "Minderella", "Ramos Mejia", 64000, "tmp/test.pfx",
+				Encrypter.decrypt("[rtf_hzi"), "", "", "", "tmp/tmpFiles/signed.pdf", "tmp/0.jpg", 10, 10);
 		doc.closeDocument();
 
 		return new ModelAndView("signer");

@@ -146,7 +146,7 @@ public class CertificateManager {
 										.generateCertificates(certStream);
 								ret += "\ncerts=" + certs;
 
-							} else if (subFilter.getName().equals("adbe.pkcs7.sha1")) {
+							} else if (subFilter.getName().equals("adbe.pkcs7.detached")) {
 
 								COSString certString = (COSString) cert.getDictionaryObject(COSName.CONTENTS);
 								byte[] certData = certString.getBytes();

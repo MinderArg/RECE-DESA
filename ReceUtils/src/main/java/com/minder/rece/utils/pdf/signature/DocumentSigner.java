@@ -134,7 +134,6 @@ public class DocumentSigner implements SignatureInterface {
 
 		try {
 			KeyStore keystore = KeyStore.getInstance(getKeyStoreType(), getProvider());
-
 			InputStream input = new FileInputStream(getKeyStoreLocation());
 
 			keystore.load(input, getPassword().toCharArray());
@@ -179,6 +178,7 @@ public class DocumentSigner implements SignatureInterface {
 			signature.setFilter(PDSignature.FILTER_ADOBE_PPKLITE);
 
 			// subfilter for basic and PAdES Part 2 signatures
+			//SUBFILTER_ADBE_PKCS7_DETACHED
 			signature.setSubFilter(PDSignature.SUBFILTER_ADBE_PKCS7_DETACHED);
 			signature.setName(getName());
 			signature.setReason(getReason());
@@ -211,7 +211,6 @@ public class DocumentSigner implements SignatureInterface {
 				signatureOptions.setVisualSignature(signatureProperties);
 
 			}
-
 			doc.addSignature(signature, this, signatureOptions);
 
 			// write incremental (only for signing purpose)
@@ -260,72 +259,7 @@ public class DocumentSigner implements SignatureInterface {
 	}
 
 	public void signPdf(RecePDF pdf, String dest, String pathImageSign, int xAxisPosition, int yAxisPosition) {
-		try {
-			File document = new File(pdf.getPath());
-			File outputDocument = new File(dest);
-
-			FileInputStream fis = new FileInputStream(document);
-			FileOutputStream fos = new FileOutputStream(outputDocument);
-
-			byte[] buffer = new byte[8 * 1024];
-			int c;
-			while ((c = fis.read(buffer)) != -1) {
-				fos.write(buffer, 0, c);
-			}
-			fis.close();
-			fis = new FileInputStream(outputDocument);
-
-			PDDocument doc = pdf.getDocument();
-
-			PDSignature signature = new PDSignature();
-
-			// default filter
-			signature.setFilter(PDSignature.FILTER_ADOBE_PPKLITE);
-
-			// subfilter for basic and PAdES Part 2 signatures
-			signature.setSubFilter(PDSignature.SUBFILTER_ADBE_PKCS7_DETACHED);
-			signature.setName(getName());
-			signature.setReason(getReason());
-			signature.setLocation(getLocation());
-
-			// the signing date, needed for valid signature
-			Calendar cal = Calendar.getInstance();
-			signature.setSignDate(cal);
-
-			SignatureOptions signatureOptions = new SignatureOptions();
-			signatureOptions.setPreferedSignatureSize(getSignatureSize());
-
-			if (!pathImageSign.isEmpty()) {
-
-				FileInputStream image = new FileInputStream(pathImageSign);
-
-				// BufferedImage image = ImageIO.read(new File(pathImageSign));
-
-				PDVisibleSignDesigner visibleSig = new PDVisibleSignDesigner(pdf.getPath(), image, 1);
-				visibleSig.xAxis(xAxisPosition).yAxis(yAxisPosition).signatureFieldName("signature");
-
-				PDVisibleSigProperties signatureProperties = new PDVisibleSigProperties();
-
-				signatureProperties.signerName("name").signerLocation("location").signatureReason("Security")
-						.preferredSize(0).page(1).visualSignEnabled(true).setPdVisibleSignature(visibleSig)
-						.buildSignature();// ver
-											// método
-											// .size
-
-				signatureOptions.setVisualSignature(signatureProperties);
-
-			}
-
-			doc.addSignature(signature, this, signatureOptions);
-
-			// write incremental (only for signing purpose)
-			doc.saveIncremental(fis, fos);
-
-			// Close document
-			doc.close();
-		} catch (IOException | SignatureException | COSVisitorException e) {
-			throw new RuntimeException("Error while signing pdf", e);
-		}
+		signPdf(pdf.getPath(), dest, pathImageSign, xAxisPosition, yAxisPosition);
 	}
 
 }

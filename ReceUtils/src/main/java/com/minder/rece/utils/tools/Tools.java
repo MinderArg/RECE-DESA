@@ -26,8 +26,7 @@ public class Tools {
 			throws IOException {
 
 		// Creating the directory to store file
-		String directory = dirPath + File.separator + "tmpFiles";
-		File dir = new File(directory);
+		File dir = new File(dirPath);
 		if (!dir.exists())
 			dir.mkdirs();
 
@@ -37,6 +36,6 @@ public class Tools {
 		stream.write(bytes);
 		stream.close();
 
-		return directory + File.separator + name + "." + ext;
+		return dirPath + File.separator + name + "." + ext;
 	}
 }
