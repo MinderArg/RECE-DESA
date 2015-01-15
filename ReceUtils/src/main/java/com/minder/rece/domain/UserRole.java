@@ -3,8 +3,8 @@ package com.minder.rece.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "headquarters")
-public class Headquarter {
+@Table(name = "user_roles")
+public class UserRole {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,12 +13,6 @@ public class Headquarter {
 	private String name;
 	
 	private String description;
-	
-	private String address;
-
-	@ManyToOne
-	@JoinColumn(name = "company_id")
-	private Company company;
 
 	public Integer getId() {
 		return id;
@@ -42,22 +36,6 @@ public class Headquarter {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public Company getCompany() {
-		return company;
-	}
-
-	public void setCompany(Company company) {
-		this.company = company;
 	}
 
 }

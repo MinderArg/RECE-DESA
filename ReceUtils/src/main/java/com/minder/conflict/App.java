@@ -1,15 +1,18 @@
 package com.minder.conflict;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
  
 
 
 
-import org.hibernate.HibernateException;
+
+
+import java.util.Set;
+
 import org.hibernate.*;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
@@ -50,14 +53,25 @@ public class App {
             LiquidationFile file = new LiquidationFile();
             
             fileStatus.setDescription("Prueba de status.");
-            fileStatus.setName("TestBeta");
-            file.setName("MockBeta");
+            fileStatus.setName("EstadoA");
+            file.setName("ArchivoA");
             file.setUri("//mis docs");
             
-            file.setStatus(fileStatus);
+            file.setLiquidationFileStatus(fileStatus);
              
             // Saving to the database
             session.save(fileStatus);
+            session.save(file);
+            
+            
+            file = new LiquidationFile();
+
+            file.setName("ArchivoB");
+            file.setUri("//mis docs");
+            
+            file.setLiquidationFileStatus(fileStatus);
+             
+            // Saving to the database
             session.save(file);
              
             // Committing the change in the database.
@@ -66,13 +80,22 @@ public class App {
              
             // Fetching saved data
             tx = session.beginTransaction();
+            
+            System.out.println("--LiquidationFile--");
 			List<LiquidationFile> fileList = session.createQuery("from LiquidationFile").list();
-             
             for (LiquidationFile liqFile : fileList) {
             	
-            	System.out.println("Id: " + liqFile.getId() + " | Name:"  + liqFile.getName() + " | Uri:" + liqFile.getUri()+ " | Status: "+liqFile.getStatus().getName());
+            	System.out.println("Id: " + liqFile.getId() + " | Name:"  + liqFile.getName() + " | Uri:" + liqFile.getUri()+ " | Status: "+liqFile.getLiquidationFileStatus().getName());
             }
 
+            System.out.println("--LiquidationFileStatus--");
+			List<LiquidationFileStatus> statusList = session.createQuery("from LiquidationFileStatus").list();
+            for (LiquidationFileStatus status : statusList) {
+            	
+            	System.out.println("Id: " + status.getId() + " | Name:"  + status.getName() + " | Desc: " + status.getDescription());
+            	
+            }
+            
             session.flush();
 			tx.commit();
              
