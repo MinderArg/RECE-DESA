@@ -12,14 +12,22 @@ import org.apache.pdfbox.util.PDFTextStripper;
 public class Splitter {
 
 	public static void splitDocument(RecePDF doc) {
-		System.out.println("-----------Iniciando formateo del documento.-----------");
-		if (doc.getDoublePage()) {
-			System.out.println("-----------Iniciando corte del documento.-----------");
-			cutPages(doc);
-		}
 
-		System.out.println("-----------Iniciando spliteo del documento.-----------");
-		splitCUIL(doc);
+		RecePDF.saveDocument(doc.getDocument(), doc.getPathWithTag("-TEST"));
+		
+//		System.out.println("-----------Iniciando formateo del documento.-----------");
+//		if (doc.getDoublePage()) {
+//			System.out.println("-----------Iniciando corte del documento.-----------");
+//			cutPages(doc);
+//		}
+//
+//		System.out.println("-----------Iniciando spliteo del documento.-----------");
+//		try {
+//			splitCUIL(doc);
+//		} catch (IOException e) {
+//			System.out.println("Problema en splitCUIL.");
+//			e.printStackTrace();
+//		}
 
 		System.out.println("-----------Fin del formateo del documento.-----------");
 	}
@@ -35,11 +43,12 @@ public class Splitter {
 		try {
 			PDDocument docCopy = new PDDocument();
 			for (int actPage = 1; actPage <= doc.getNumberOfPages(); actPage++) {
-				docCopy.addPage(doc.getPage(actPage));
-				docCopy.addPage(doc.getPage(actPage));
+				docCopy.importPage(doc.getPage(actPage));
+				docCopy.importPage(doc.getPage(actPage));
 			}
+			
 			PDDocument cutDoc = new PDDocument();
-			for (int actPage = 1; actPage <= docCopy.getNumberOfPages(); actPage++) {
+			for (int actPage = 1; actPage <= doc.getNumberOfPages()*2; actPage++) {
 				PDPage page = (PDPage) docCopy.getDocumentCatalog().getAllPages().get(actPage - 1);
 				PDRectangle rectangle = new PDRectangle();
 				rectangle.setUpperRightY(page.findCropBox().getUpperRightY());
@@ -84,7 +93,7 @@ public class Splitter {
 		}
 	}
 
-	private static void splitCUIL(RecePDF doc) {
+	private static void splitCUIL(RecePDF doc) throws IOException {
 		int cantDoc = 0, firstCUILPage = 0;
 		String prevCUIL = "-";
 
@@ -92,7 +101,7 @@ public class Splitter {
 
 		for (int actPage = 1; actPage <= doc.getNumberOfPages(); actPage++) {
 			String actCUIL = getCUIL(doc, actPage);
-			if (!actCUIL.equals(prevCUIL)) {
+			if (!actCUIL.equals(prevCUIL) || actPage==doc.getNumberOfPages()) {
 				if (firstCUILPage != 0) {
 					int pages = actPage - firstCUILPage;
 					PDDocument oriDoc, dupDoc;
@@ -101,17 +110,17 @@ public class Splitter {
 					if (doc.getDoublePage()) { // Página Doble
 						// Generar PDF Recibos Original
 						for (int i = firstCUILPage; i < firstCUILPage + pages; i += 2)
-							oriDoc.addPage(doc.getPage(i));
+							oriDoc.importPage(doc.getPage(i));
 						// Generar PDF Recibos Duplicado
 						for (int i = firstCUILPage + 1; i < firstCUILPage + pages; i += 2)
-							dupDoc.addPage(doc.getPage(i));
+							dupDoc.importPage(doc.getPage(i));
 					} else { // Página Simple
 								// Generar PDF Recibos Original
 						for (int i = firstCUILPage; i < firstCUILPage + pages / 2; i++)
-							oriDoc.addPage(doc.getPage(i));
+							oriDoc.importPage(doc.getPage(i));
 						// Generar PDF Recibos Duplicado
 						for (int i = firstCUILPage + pages / 2; i < firstCUILPage + pages; i++)
-							dupDoc.addPage(doc.getPage(i));
+							dupDoc.importPage(doc.getPage(i));
 					}
 					RecePDF.saveDocument(oriDoc, doc.getPathWithTag("-ORI-" + prevCUIL));
 					RecePDF.saveDocument(dupDoc, doc.getPathWithTag("-DUP-" + prevCUIL));
@@ -120,6 +129,8 @@ public class Splitter {
 				firstCUILPage = actPage;
 			}
 			prevCUIL = actCUIL;
+			System.out.println("actPage: "+actPage);
+			System.out.println("actCUIL: "+actCUIL);
 		}
 		// TODO: Quitar mensaje informativo
 		System.out.println("Se procesaron " + cantDoc + " recibos.");

@@ -7,6 +7,14 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>generator Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  
+<!--   <repositories> -->
+<!-- 	  <repository> -->
+<!-- 		  <id>hibernatesqlite-maven</id> -->
+<!-- 		  <url>https://hibernate-sqlite.googlecode.com/svn/trunk/mavenrepo</url> -->
+<!-- 	  </repository> -->
+<!--   </repositories> -->
+  
   <dependencies>
   
 	<!-- JUnit -->
@@ -77,10 +85,60 @@
 		<artifactId>bcpkix-jdk15on</artifactId>
 		<version>${bouncycastle.version}</version>
 	</dependency>
+	
+    <!-- Hibernate -->
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-core</artifactId>
+		<version>4.3.7.Final</version>
+	</dependency>
+	
+    <!-- Hibernate -->
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate</artifactId>
+		<version>3.2.7.ga</version>
+	</dependency>
+
+    <!-- SQLite JDBC library -->
+    <dependency>
+        <groupId>org.xerial</groupId>
+        <artifactId>sqlite-jdbc</artifactId>
+        <version>3.7.2</version>
+    </dependency>
+    
+    <dependency>
+		<groupId>javax.transaction</groupId>
+		<artifactId>jta</artifactId>
+		<version>1.1</version>
+	</dependency>
+    
+	<!-- Hibernate sqlite dialect -->
+<!-- 	<dependency> -->
+<!-- 	  <groupId>com.applerao</groupId> -->
+<!-- 	  <artifactId>hibernatesqlite</artifactId> -->
+<!-- 	  <version>1.0</version> -->
+<!-- 	  <exclusions> -->
+<!--             <exclusion> -->
+<!--                     <groupId>org.hibernate</groupId> -->
+<!--                     <artifactId>hibernate</artifactId> -->
+<!--             </exclusion> -->
+<!--       </exclusions> -->
+<!-- 	</dependency> -->
     
   </dependencies>
   <build>
     <finalName>generator</finalName>
+    <plugins>
+    	<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>1.5</source>
+                <target>1.5</target>
+            </configuration>
+        </plugin>
+     </plugins>
   </build>
   <properties>
   	<bouncycastle.version>1.50</bouncycastle.version>

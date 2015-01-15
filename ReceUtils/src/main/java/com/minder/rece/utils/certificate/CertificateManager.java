@@ -59,10 +59,14 @@ public class CertificateManager {
 	 * @param algorithm
 	 *            the signing algorithm, eg "SHA1withRSA"
 	 */
+	
 	public static X509Certificate generateCertificate(String dn, int days)
 			throws GeneralSecurityException, IOException {
-
-		String algorithm = "SHA1withRSA";
+		return generateCertificate(dn, days, "SHA1withRSA");
+	}
+	
+	public static X509Certificate generateCertificate(String dn, int days, String algorithm)
+			throws GeneralSecurityException, IOException {
 
 		KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
 		kpg.initialize(2048);

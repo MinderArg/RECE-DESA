@@ -47,7 +47,7 @@ public class DocumentSigner implements SignatureInterface {
 
 	private static final String PROVIDER_BC = "BC";
 	private static final String KEYSTORE_TYPE_PKCS12 = "PKCS12";
-	private static final String HASH_ALGORITHM_SHA256 = "SHA-256";
+	private static final String HASH_ALGORITHM_SHA256 = "SHA256withRSA";
 
 	private PrivateKey privateKey;
 	private Certificate[] chain;
@@ -230,7 +230,7 @@ public class DocumentSigner implements SignatureInterface {
 			// general class for generating a pkcs7-signature message
 			CMSSignedDataGenerator gen = new CMSSignedDataGenerator();
 
-			ContentSigner signer = new JcaContentSignerBuilder("SHA256withRSA").setProvider(getProvider())
+			ContentSigner signer = new JcaContentSignerBuilder(hashAlgorithm).setProvider(getProvider())
 					.build(privateKey);
 
 			gen.addSignerInfoGenerator(new JcaSignerInfoGeneratorBuilder(
