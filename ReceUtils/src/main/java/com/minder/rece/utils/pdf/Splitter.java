@@ -15,19 +15,19 @@ public class Splitter {
 
 		RecePDF.saveDocument(doc.getDocument(), doc.getPathWithTag("-TEST"));
 		
-//		System.out.println("-----------Iniciando formateo del documento.-----------");
-//		if (doc.getDoublePage()) {
-//			System.out.println("-----------Iniciando corte del documento.-----------");
-//			cutPages(doc);
-//		}
-//
-//		System.out.println("-----------Iniciando spliteo del documento.-----------");
-//		try {
-//			splitCUIL(doc);
-//		} catch (IOException e) {
-//			System.out.println("Problema en splitCUIL.");
-//			e.printStackTrace();
-//		}
+		System.out.println("-----------Iniciando formateo del documento.-----------");
+		if (doc.getDoublePage()) {
+			System.out.println("-----------Iniciando corte del documento.-----------");
+			cutPages(doc);
+		}
+
+		System.out.println("-----------Iniciando spliteo del documento.-----------");
+		try {
+			splitCUIL(doc);
+		} catch (IOException e) {
+			System.out.println("Problema en splitCUIL.");
+			e.printStackTrace();
+		}
 
 		System.out.println("-----------Fin del formateo del documento.-----------");
 	}
@@ -71,23 +71,6 @@ public class Splitter {
 			doc.closeDocument();
 			doc.setDocument(PDDocument.load(doc.getPathWithTag("-CUT")));
 
-			/*
-			 * PRUEBA 2 PDDocument cutDoc = new PDDocument();
-			 * cutDoc.addPage(getPage(1)); cutDoc.addPage(getPage(2));
-			 * cutDoc.addPage(getPage(3)); cutDoc.addPage(getPage(4));
-			 * cutDoc.addPage(getPage(5)); cutDoc.addPage(getPage(6));
-			 * //saveDocument(cutDoc, pathWithTag("-DANY"));
-			 * 
-			 * System.out.println(doc.); System.out.println("---------------");
-			 * closeDocument(); doc = cutDoc;
-			 * System.out.println(doc.getNumberOfPages());
-			 * System.out.println(doc
-			 * .getDocumentCatalog().getPages().getCount());
-			 * System.out.println(doc
-			 * .getDocumentCatalog().getAllPages().size()); //getPage(2);
-			 * //System.out.println(doc.getNumberOfPages());
-			 * //saveDocument(cutDoc, pathWithTag("-CUT"));
-			 */
 		} catch (IOException e) {
 			System.out.println("Error al cortar las páginas. " + e.toString());
 		}
