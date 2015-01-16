@@ -10,6 +10,7 @@ public class Password {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
+	@Column(name="encrypted_password")
 	private String encryptedPassword;
 
 	public Integer getId() {

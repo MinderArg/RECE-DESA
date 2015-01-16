@@ -9,9 +9,11 @@ public class Receipt {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
+	@Column(name="uri_splitted_employee")
 	private String uriSplittedEmployee;
-	
+
+	@Column(name="uri_splitted_company")
 	private String uriSplittedCompany;
 
     @OneToOne(cascade=CascadeType.ALL)

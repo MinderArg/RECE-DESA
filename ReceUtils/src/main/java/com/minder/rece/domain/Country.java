@@ -11,13 +11,17 @@ public class Country {
 	private Integer id;
 	
 	private String name;
-	
+
+	@Column(name="unique_employee_key_label")
 	private String uniqueEmployeeKeyLabel;
-	
+
+	@Column(name="unique_employee_key_pattern")
 	private String uniqueEmployeeKeyPattern;
-	
+
+	@Column(name="unique_company_key_label")
 	private String uniqueCompanyKeyLabel;
-	
+
+	@Column(name="unique_company_key_pattern")
 	private String uniqueCompanyKeyPattern;
 
 	@ManyToOne

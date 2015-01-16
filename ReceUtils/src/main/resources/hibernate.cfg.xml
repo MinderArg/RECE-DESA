@@ -16,10 +16,26 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
          
         <mapping package="com.minder.rece.domain" />
+        <mapping class="com.minder.rece.domain.BusinessPlan"/>
         <mapping class="com.minder.rece.domain.Certificate"/>
         <mapping class="com.minder.rece.domain.CertificateType"/>
         <mapping class="com.minder.rece.domain.Company"/>
-        <mapping class="com.minder.rece.domain.LiquidationFileStatus"/>
+        <mapping class="com.minder.rece.domain.CompanySigner"/>
+        <mapping class="com.minder.rece.domain.Country"/>
+        <mapping class="com.minder.rece.domain.Credit"/>
+        <mapping class="com.minder.rece.domain.Employee"/>
+        <mapping class="com.minder.rece.domain.Headquarter"/>
+        <mapping class="com.minder.rece.domain.Holding"/>
+        <mapping class="com.minder.rece.domain.Language"/>
+        <mapping class="com.minder.rece.domain.Liquidation"/>
         <mapping class="com.minder.rece.domain.LiquidationFile"/>
+        <mapping class="com.minder.rece.domain.LiquidationFileStatus"/>
+        <mapping class="com.minder.rece.domain.Password"/>
+        <mapping class="com.minder.rece.domain.Receipt"/>
+        <mapping class="com.minder.rece.domain.RoleAssignment"/>
+        <mapping class="com.minder.rece.domain.SignedReceipt"/>
+        <mapping class="com.minder.rece.domain.Signer"/>
+        <mapping class="com.minder.rece.domain.User"/>
+        <mapping class="com.minder.rece.domain.UserRole"/>
     </session-factory>
 </hibernate-configuration>

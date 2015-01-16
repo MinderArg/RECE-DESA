@@ -1,6 +1,7 @@
 package com.minder.rece.domain;
 
 import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +16,7 @@ public class Holding {
 
 	private String address;
 
+	@Column(name="unique_holding_key")
 	private String uniqueHoldingKey;
 
 	@ManyToOne

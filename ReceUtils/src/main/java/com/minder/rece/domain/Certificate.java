@@ -9,11 +9,14 @@ public class Certificate {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
+	@Column(name="all_attr")
 	private String allAttr;
-	
+
+	@Column(name="uri_private_cert")
 	private String uriPrivateCert;
-	
+
+	@Column(name="uri_public_cert")
 	private String uriPublicCert;
 
 	@ManyToOne

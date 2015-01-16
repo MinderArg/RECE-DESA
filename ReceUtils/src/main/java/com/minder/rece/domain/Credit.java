@@ -11,7 +11,8 @@ public class Credit {
 	private Integer id;
 	
 	private int amount;
-	
+
+	@Column(name="remaining_amount")
 	private int remainingAmount;
 
 	@ManyToOne

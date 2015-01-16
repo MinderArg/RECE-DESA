@@ -5,7 +5,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "company_signers")
 public class CompanySigner extends Signer {
-	
+
+	@Column(name="uri_signature")
 	private String uriSignature;
 
 	@ManyToOne

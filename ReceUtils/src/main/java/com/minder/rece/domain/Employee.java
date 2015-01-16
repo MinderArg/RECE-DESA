@@ -5,13 +5,17 @@ import javax.persistence.*;
 @Entity
 @Table(name = "employees")
 public class Employee extends Signer {
-	
+
+	@Column(name="unique_employee_key")
 	private String uniqueEmployeeKey;
-	
+
+	@Column(name="employee_file_id")
 	private String employeeFileId;
-	
+
+	@Column(name="corporate_email")
 	private String corporateEmail;
-	
+
+	@Column(name="mobile_phone")
 	private String mobilePhone;
 
 	public String getUniqueEmployeeKey() {

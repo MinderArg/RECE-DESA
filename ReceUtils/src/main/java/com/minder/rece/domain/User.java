@@ -19,8 +19,10 @@ public class User {
 	private String email;
 	
 	private String username;
-	
-	private Password password;
+
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name = "user_id")
+	private Set<Password> passwords;
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name = "user_id")
@@ -66,12 +68,12 @@ public class User {
 		this.username = username;
 	}
 
-	public Password getPassword() {
-		return password;
+	public Set<Password> getPasswords() {
+		return passwords;
 	}
 
-	public void setPassword(Password password) {
-		this.password = password;
+	public void setPasswords(Set<Password> passwords) {
+		this.passwords = passwords;
 	}
 
 	public Set<RoleAssignment> getRoles() {

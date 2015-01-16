@@ -14,6 +14,7 @@ public class Language {
 
 	private String description;
 
+	@Column(name="uri_app_labels")
 	private String uriAppLabels;
 
 	public Integer getId() {

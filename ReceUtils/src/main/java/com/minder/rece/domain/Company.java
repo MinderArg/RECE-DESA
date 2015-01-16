@@ -13,9 +13,11 @@ public class Company {
 	private String name;
 	
 	private String address;
-	
+
+	@Column(name="unique_company_key")
 	private String uniqueCompanyKey;
-	
+
+	@Column(name="uri_logo")
 	private String uriLogo;
 	
 	@ManyToOne

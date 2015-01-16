@@ -9,13 +9,17 @@ public class SignedReceipt {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
-	private String ipWhereSigned;
-	
-	private String browserWhereSigned;
-	
-	private String wasDownloaded;
 
+	@Column(name="ip_where_signed")
+	private String ipWhereSigned;
+
+	@Column(name="browser_where_signed")
+	private String browserWhereSigned;
+
+	@Column(name="was_downloaded")
+	private Boolean wasDownloaded;
+
+	@Column(name="signed_by")
 	private String signedBy;
 	
 	public String getIpWhereSigned() {
@@ -34,11 +38,11 @@ public class SignedReceipt {
 		this.browserWhereSigned = browserWhereSigned;
 	}
 
-	public String getWasDownloaded() {
+	public Boolean getWasDownloaded() {
 		return wasDownloaded;
 	}
 
-	public void setWasDownloaded(String wasDownloaded) {
+	public void setWasDownloaded(Boolean wasDownloaded) {
 		this.wasDownloaded = wasDownloaded;
 	}
 
