@@ -3,15 +3,16 @@ package com.minder.rece.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "passwords")
-public class Password {
-
+@Table(name = "granted_permissions")
+public class GrantedPermission {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
-	@Column(name="encrypted_password")
-	private String encryptedPassword;
+
+	@ManyToOne
+	@JoinColumn(name = "permission_id")
+	private Permission permission;
 
 	public Integer getId() {
 		return id;
@@ -21,20 +22,20 @@ public class Password {
 		this.id = id;
 	}
 
-	public String getEncryptedPassword() {
-		return encryptedPassword;
+	public Permission getPermission() {
+		return permission;
 	}
 
-	public void setEncryptedPassword(String encryptedPassword) {
-		this.encryptedPassword = encryptedPassword;
+	public void setPermission(Permission permission) {
+		this.permission = permission;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((encryptedPassword == null) ? 0 : encryptedPassword.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((permission == null) ? 0 : permission.hashCode());
 		return result;
 	}
 
@@ -46,16 +47,16 @@ public class Password {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Password other = (Password) obj;
-		if (encryptedPassword == null) {
-			if (other.encryptedPassword != null)
-				return false;
-		} else if (!encryptedPassword.equals(other.encryptedPassword))
-			return false;
+		GrantedPermission other = (GrantedPermission) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (permission == null) {
+			if (other.permission != null)
+				return false;
+		} else if (!permission.equals(other.permission))
 			return false;
 		return true;
 	}

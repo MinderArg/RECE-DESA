@@ -3,19 +3,16 @@ package com.minder.rece.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "languages")
-public class Language {
+@Table(name = "token_types")
+public class TokenType {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
 	private String name;
-
+	
 	private String description;
-
-	@Column(name="uri_app_labels")
-	private String uriAppLabels;
 
 	public Integer getId() {
 		return id;
@@ -41,14 +38,6 @@ public class Language {
 		this.description = description;
 	}
 
-	public String getUriAppLabels() {
-		return uriAppLabels;
-	}
-
-	public void setUriAppLabels(String uriAppLabels) {
-		this.uriAppLabels = uriAppLabels;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -56,7 +45,6 @@ public class Language {
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((uriAppLabels == null) ? 0 : uriAppLabels.hashCode());
 		return result;
 	}
 
@@ -68,7 +56,7 @@ public class Language {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Language other = (Language) obj;
+		TokenType other = (TokenType) obj;
 		if (description == null) {
 			if (other.description != null)
 				return false;
@@ -83,11 +71,6 @@ public class Language {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
-			return false;
-		if (uriAppLabels == null) {
-			if (other.uriAppLabels != null)
-				return false;
-		} else if (!uriAppLabels.equals(other.uriAppLabels))
 			return false;
 		return true;
 	}

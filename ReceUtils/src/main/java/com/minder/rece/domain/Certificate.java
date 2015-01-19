@@ -62,5 +62,54 @@ public class Certificate {
 	public void setCertificateType(CertificateType certificateType) {
 		this.certificateType = certificateType;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((allAttr == null) ? 0 : allAttr.hashCode());
+		result = prime * result + ((certificateType == null) ? 0 : certificateType.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((uriPrivateCert == null) ? 0 : uriPrivateCert.hashCode());
+		result = prime * result + ((uriPublicCert == null) ? 0 : uriPublicCert.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Certificate other = (Certificate) obj;
+		if (allAttr == null) {
+			if (other.allAttr != null)
+				return false;
+		} else if (!allAttr.equals(other.allAttr))
+			return false;
+		if (certificateType == null) {
+			if (other.certificateType != null)
+				return false;
+		} else if (!certificateType.equals(other.certificateType))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (uriPrivateCert == null) {
+			if (other.uriPrivateCert != null)
+				return false;
+		} else if (!uriPrivateCert.equals(other.uriPrivateCert))
+			return false;
+		if (uriPublicCert == null) {
+			if (other.uriPublicCert != null)
+				return false;
+		} else if (!uriPublicCert.equals(other.uriPublicCert))
+			return false;
+		return true;
+	}
 	
 }

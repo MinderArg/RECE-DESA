@@ -27,6 +27,18 @@ public class LiquidationFile {
 	@JoinColumn(name = "id_liquidation")
 	private Liquidation liquidation;
 
+	@ManyToOne
+	@JoinColumn(name = "file_split_and_sign_configuration_id")
+	private FileSplitAndSignConfiguration fileSplitAndSignConfiguration;
+
+	public FileSplitAndSignConfiguration getFileSplitAndSignConfiguration() {
+		return fileSplitAndSignConfiguration;
+	}
+
+	public void setFileSplitAndSignConfiguration(FileSplitAndSignConfiguration fileSplitAndSignConfiguration) {
+		this.fileSplitAndSignConfiguration = fileSplitAndSignConfiguration;
+	}
+
 	public CompanySigner getCompanySigner() {
 		return companySigner;
 	}
@@ -73,6 +85,68 @@ public class LiquidationFile {
 
 	public void setLiquidationFileStatus(LiquidationFileStatus liquidationFileStatus) {
 		this.liquidationFileStatus = liquidationFileStatus;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((companySigner == null) ? 0 : companySigner.hashCode());
+		result = prime * result
+				+ ((fileSplitAndSignConfiguration == null) ? 0 : fileSplitAndSignConfiguration.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((liquidation == null) ? 0 : liquidation.hashCode());
+		result = prime * result + ((liquidationFileStatus == null) ? 0 : liquidationFileStatus.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((uri == null) ? 0 : uri.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LiquidationFile other = (LiquidationFile) obj;
+		if (companySigner == null) {
+			if (other.companySigner != null)
+				return false;
+		} else if (!companySigner.equals(other.companySigner))
+			return false;
+		if (fileSplitAndSignConfiguration == null) {
+			if (other.fileSplitAndSignConfiguration != null)
+				return false;
+		} else if (!fileSplitAndSignConfiguration.equals(other.fileSplitAndSignConfiguration))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (liquidation == null) {
+			if (other.liquidation != null)
+				return false;
+		} else if (!liquidation.equals(other.liquidation))
+			return false;
+		if (liquidationFileStatus == null) {
+			if (other.liquidationFileStatus != null)
+				return false;
+		} else if (!liquidationFileStatus.equals(other.liquidationFileStatus))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (uri == null) {
+			if (other.uri != null)
+				return false;
+		} else if (!uri.equals(other.uri))
+			return false;
+		return true;
 	}
 
 }

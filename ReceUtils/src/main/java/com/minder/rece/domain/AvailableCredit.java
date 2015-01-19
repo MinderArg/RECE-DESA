@@ -1,10 +1,9 @@
 package com.minder.rece.domain;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "credits")
-public class Credit {
+@Table(name = "available_credits")
+public class AvailableCredit {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,8 +15,8 @@ public class Credit {
 	private int remainingAmount;
 
 	@ManyToOne
-	@JoinColumn(name = "business_plan_id")
-	private BusinessPlan businessPlan;
+	@JoinColumn(name = "credit_id")
+	private Credit credit;
 
 	public Integer getId() {
 		return id;
@@ -43,12 +42,12 @@ public class Credit {
 		this.remainingAmount = remainingAmount;
 	}
 
-	public BusinessPlan getBusinessPlan() {
-		return businessPlan;
+	public Credit getCredit() {
+		return credit;
 	}
 
-	public void setBusinessPlan(BusinessPlan businessPlan) {
-		this.businessPlan = businessPlan;
+	public void setCredit(Credit credit) {
+		this.credit = credit;
 	}
 
 	@Override
@@ -56,7 +55,7 @@ public class Credit {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + amount;
-		result = prime * result + ((businessPlan == null) ? 0 : businessPlan.hashCode());
+		result = prime * result + ((credit == null) ? 0 : credit.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + remainingAmount;
 		return result;
@@ -70,13 +69,13 @@ public class Credit {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Credit other = (Credit) obj;
+		AvailableCredit other = (AvailableCredit) obj;
 		if (amount != other.amount)
 			return false;
-		if (businessPlan == null) {
-			if (other.businessPlan != null)
+		if (credit == null) {
+			if (other.credit != null)
 				return false;
-		} else if (!businessPlan.equals(other.businessPlan))
+		} else if (!credit.equals(other.credit))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -87,5 +86,5 @@ public class Credit {
 			return false;
 		return true;
 	}
-
+	
 }

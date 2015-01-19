@@ -4,7 +4,7 @@
  
 <hibernate-configuration>
     <session-factory>
-        <property name="show_sql">true</property>
+        <property name="show_sql">false</property>
         <property name="format_sql">true</property>
 <!--         <property name="dialect">com.applerao.hibernatesqlite.dialect.SQLiteDialect</property> -->
         <property name="dialect">com.minder.rece.utils.db.SQLiteDialect</property>
@@ -16,6 +16,7 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
          
         <mapping package="com.minder.rece.domain" />
+        <mapping class="com.minder.rece.domain.AvailableCredit"/>
         <mapping class="com.minder.rece.domain.BusinessPlan"/>
         <mapping class="com.minder.rece.domain.Certificate"/>
         <mapping class="com.minder.rece.domain.CertificateType"/>
@@ -24,17 +25,24 @@
         <mapping class="com.minder.rece.domain.Country"/>
         <mapping class="com.minder.rece.domain.Credit"/>
         <mapping class="com.minder.rece.domain.Employee"/>
+        <mapping class="com.minder.rece.domain.FileSplitAndSignConfiguration"/>
+        <mapping class="com.minder.rece.domain.GrantedPermission"/>
         <mapping class="com.minder.rece.domain.Headquarter"/>
+        <mapping class="com.minder.rece.domain.HeadquarterAssignment"/>
+        <mapping class="com.minder.rece.domain.HeadquarterSupervisorAssignment"/>
         <mapping class="com.minder.rece.domain.Holding"/>
         <mapping class="com.minder.rece.domain.Language"/>
         <mapping class="com.minder.rece.domain.Liquidation"/>
         <mapping class="com.minder.rece.domain.LiquidationFile"/>
         <mapping class="com.minder.rece.domain.LiquidationFileStatus"/>
         <mapping class="com.minder.rece.domain.Password"/>
+        <mapping class="com.minder.rece.domain.Permission"/>
         <mapping class="com.minder.rece.domain.Receipt"/>
         <mapping class="com.minder.rece.domain.RoleAssignment"/>
         <mapping class="com.minder.rece.domain.SignedReceipt"/>
         <mapping class="com.minder.rece.domain.Signer"/>
+        <mapping class="com.minder.rece.domain.Token"/>
+        <mapping class="com.minder.rece.domain.TokenType"/>
         <mapping class="com.minder.rece.domain.User"/>
         <mapping class="com.minder.rece.domain.UserRole"/>
     </session-factory>

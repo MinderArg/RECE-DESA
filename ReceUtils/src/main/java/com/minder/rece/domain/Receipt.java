@@ -100,4 +100,73 @@ public class Receipt {
 		this.file = file;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((employee == null) ? 0 : employee.hashCode());
+		result = prime * result + ((file == null) ? 0 : file.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((receiptSignedByCompany == null) ? 0 : receiptSignedByCompany.hashCode());
+		result = prime * result
+				+ ((receiptSignedByEmployeeConf == null) ? 0 : receiptSignedByEmployeeConf.hashCode());
+		result = prime * result
+				+ ((receiptSignedByEmployeeNoConf == null) ? 0 : receiptSignedByEmployeeNoConf.hashCode());
+		result = prime * result + ((uriSplittedCompany == null) ? 0 : uriSplittedCompany.hashCode());
+		result = prime * result + ((uriSplittedEmployee == null) ? 0 : uriSplittedEmployee.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Receipt other = (Receipt) obj;
+		if (employee == null) {
+			if (other.employee != null)
+				return false;
+		} else if (!employee.equals(other.employee))
+			return false;
+		if (file == null) {
+			if (other.file != null)
+				return false;
+		} else if (!file.equals(other.file))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (receiptSignedByCompany == null) {
+			if (other.receiptSignedByCompany != null)
+				return false;
+		} else if (!receiptSignedByCompany.equals(other.receiptSignedByCompany))
+			return false;
+		if (receiptSignedByEmployeeConf == null) {
+			if (other.receiptSignedByEmployeeConf != null)
+				return false;
+		} else if (!receiptSignedByEmployeeConf.equals(other.receiptSignedByEmployeeConf))
+			return false;
+		if (receiptSignedByEmployeeNoConf == null) {
+			if (other.receiptSignedByEmployeeNoConf != null)
+				return false;
+		} else if (!receiptSignedByEmployeeNoConf.equals(other.receiptSignedByEmployeeNoConf))
+			return false;
+		if (uriSplittedCompany == null) {
+			if (other.uriSplittedCompany != null)
+				return false;
+		} else if (!uriSplittedCompany.equals(other.uriSplittedCompany))
+			return false;
+		if (uriSplittedEmployee == null) {
+			if (other.uriSplittedEmployee != null)
+				return false;
+		} else if (!uriSplittedEmployee.equals(other.uriSplittedEmployee))
+			return false;
+		return true;
+	}
+
 }

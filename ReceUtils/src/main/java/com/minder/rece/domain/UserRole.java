@@ -1,5 +1,7 @@
 package com.minder.rece.domain;
 
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +15,18 @@ public class UserRole {
 	private String name;
 	
 	private String description;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name = "user_role_id")
+	private Set<GrantedPermission> grantedPermissions;
+
+	public Set<GrantedPermission> getGrantedPermissions() {
+		return grantedPermissions;
+	}
+
+	public void setGrantedPermissions(Set<GrantedPermission> grantedPermissions) {
+		this.grantedPermissions = grantedPermissions;
+	}
 
 	public Integer getId() {
 		return id;

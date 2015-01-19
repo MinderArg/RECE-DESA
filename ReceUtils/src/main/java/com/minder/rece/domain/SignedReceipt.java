@@ -19,8 +19,9 @@ public class SignedReceipt {
 	@Column(name="was_downloaded")
 	private Boolean wasDownloaded;
 
-	@Column(name="signed_by")
-	private String signedBy;
+	@ManyToOne
+	@JoinColumn(name = "signer_id")
+	private Signer signer;
 	
 	public String getIpWhereSigned() {
 		return ipWhereSigned;
@@ -46,12 +47,69 @@ public class SignedReceipt {
 		this.wasDownloaded = wasDownloaded;
 	}
 
-	public String getSignedBy() {
-		return signedBy;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setSignedBy(String signedBy) {
-		this.signedBy = signedBy;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Signer getSigner() {
+		return signer;
+	}
+
+	public void setSigner(Signer signer) {
+		this.signer = signer;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((browserWhereSigned == null) ? 0 : browserWhereSigned.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((ipWhereSigned == null) ? 0 : ipWhereSigned.hashCode());
+		result = prime * result + ((signer == null) ? 0 : signer.hashCode());
+		result = prime * result + ((wasDownloaded == null) ? 0 : wasDownloaded.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SignedReceipt other = (SignedReceipt) obj;
+		if (browserWhereSigned == null) {
+			if (other.browserWhereSigned != null)
+				return false;
+		} else if (!browserWhereSigned.equals(other.browserWhereSigned))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (ipWhereSigned == null) {
+			if (other.ipWhereSigned != null)
+				return false;
+		} else if (!ipWhereSigned.equals(other.ipWhereSigned))
+			return false;
+		if (signer == null) {
+			if (other.signer != null)
+				return false;
+		} else if (!signer.equals(other.signer))
+			return false;
+		if (wasDownloaded == null) {
+			if (other.wasDownloaded != null)
+				return false;
+		} else if (!wasDownloaded.equals(other.wasDownloaded))
+			return false;
+		return true;
 	}
 
 	

@@ -3,34 +3,21 @@ package com.minder.rece.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "languages")
-public class Language {
+@Table(name = "permissions")
+public class Permission {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
-	private String name;
 
 	private String description;
-
-	@Column(name="uri_app_labels")
-	private String uriAppLabels;
-
+	
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getDescription() {
@@ -41,22 +28,12 @@ public class Language {
 		this.description = description;
 	}
 
-	public String getUriAppLabels() {
-		return uriAppLabels;
-	}
-
-	public void setUriAppLabels(String uriAppLabels) {
-		this.uriAppLabels = uriAppLabels;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((uriAppLabels == null) ? 0 : uriAppLabels.hashCode());
 		return result;
 	}
 
@@ -68,7 +45,7 @@ public class Language {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Language other = (Language) obj;
+		Permission other = (Permission) obj;
 		if (description == null) {
 			if (other.description != null)
 				return false;
@@ -78,16 +55,6 @@ public class Language {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (uriAppLabels == null) {
-			if (other.uriAppLabels != null)
-				return false;
-		} else if (!uriAppLabels.equals(other.uriAppLabels))
 			return false;
 		return true;
 	}

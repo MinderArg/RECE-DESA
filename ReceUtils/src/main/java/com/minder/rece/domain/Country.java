@@ -84,4 +84,67 @@ public class Country {
 		this.language = language;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((language == null) ? 0 : language.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((uniqueCompanyKeyLabel == null) ? 0 : uniqueCompanyKeyLabel.hashCode());
+		result = prime * result
+				+ ((uniqueCompanyKeyPattern == null) ? 0 : uniqueCompanyKeyPattern.hashCode());
+		result = prime * result + ((uniqueEmployeeKeyLabel == null) ? 0 : uniqueEmployeeKeyLabel.hashCode());
+		result = prime * result
+				+ ((uniqueEmployeeKeyPattern == null) ? 0 : uniqueEmployeeKeyPattern.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Country other = (Country) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (language == null) {
+			if (other.language != null)
+				return false;
+		} else if (!language.equals(other.language))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (uniqueCompanyKeyLabel == null) {
+			if (other.uniqueCompanyKeyLabel != null)
+				return false;
+		} else if (!uniqueCompanyKeyLabel.equals(other.uniqueCompanyKeyLabel))
+			return false;
+		if (uniqueCompanyKeyPattern == null) {
+			if (other.uniqueCompanyKeyPattern != null)
+				return false;
+		} else if (!uniqueCompanyKeyPattern.equals(other.uniqueCompanyKeyPattern))
+			return false;
+		if (uniqueEmployeeKeyLabel == null) {
+			if (other.uniqueEmployeeKeyLabel != null)
+				return false;
+		} else if (!uniqueEmployeeKeyLabel.equals(other.uniqueEmployeeKeyLabel))
+			return false;
+		if (uniqueEmployeeKeyPattern == null) {
+			if (other.uniqueEmployeeKeyPattern != null)
+				return false;
+		} else if (!uniqueEmployeeKeyPattern.equals(other.uniqueEmployeeKeyPattern))
+			return false;
+		return true;
+	}
+
 }
