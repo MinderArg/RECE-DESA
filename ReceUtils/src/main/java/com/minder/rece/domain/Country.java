@@ -27,6 +27,17 @@ public class Country {
 	@ManyToOne
 	@JoinColumn(name = "language_id")
 	private Language language;
+	
+	@Embedded
+	private AuditData auditData;
+	
+	public AuditData getAuditData() {
+		return auditData;
+	}
+
+	public void setAuditData(AuditData auditData) {
+		this.auditData = auditData;
+	}
 
 	public Integer getId() {
 		return id;
@@ -88,6 +99,7 @@ public class Country {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((auditData == null) ? 0 : auditData.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((language == null) ? 0 : language.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -109,6 +121,11 @@ public class Country {
 		if (getClass() != obj.getClass())
 			return false;
 		Country other = (Country) obj;
+		if (auditData == null) {
+			if (other.auditData != null)
+				return false;
+		} else if (!auditData.equals(other.auditData))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;

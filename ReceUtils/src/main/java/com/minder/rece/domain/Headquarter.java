@@ -29,6 +29,17 @@ public class Headquarter {
 	@JoinColumn(name = "headquarter_id")
 	private Set<HeadquarterSupervisorAssignment> headquarterSupervisorAssignments;
 	
+	@Embedded
+	private AuditData auditData;
+	
+	public AuditData getAuditData() {
+		return auditData;
+	}
+
+	public void setAuditData(AuditData auditData) {
+		this.auditData = auditData;
+	}
+	
 	
 	public Set<HeadquarterSupervisorAssignment> getHeadquarterSupervisorAssignments() {
 		return headquarterSupervisorAssignments;
@@ -92,6 +103,7 @@ public class Headquarter {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((auditData == null) ? 0 : auditData.hashCode());
 		result = prime * result + ((company == null) ? 0 : company.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((headquarterAssignments == null) ? 0 : headquarterAssignments.hashCode());
@@ -117,6 +129,11 @@ public class Headquarter {
 			if (other.address != null)
 				return false;
 		} else if (!address.equals(other.address))
+			return false;
+		if (auditData == null) {
+			if (other.auditData != null)
+				return false;
+		} else if (!auditData.equals(other.auditData))
 			return false;
 		if (company == null) {
 			if (other.company != null)

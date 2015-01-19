@@ -22,6 +22,28 @@ public class Certificate {
 	@ManyToOne
 	@JoinColumn(name = "certificate_type_id")
 	private CertificateType certificateType;
+	
+	@Embedded
+	private Period activePeriod;
+	
+	@Embedded
+	private AuditData auditData;
+	
+	public AuditData getAuditData() {
+		return auditData;
+	}
+
+	public void setAuditData(AuditData auditData) {
+		this.auditData = auditData;
+	}
+
+	public Period getActivePeriod() {
+		return activePeriod;
+	}
+
+	public void setActivePeriod(Period activePeriod) {
+		this.activePeriod = activePeriod;
+	}
 
 	public Integer getId() {
 		return id;
@@ -67,7 +89,9 @@ public class Certificate {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((activePeriod == null) ? 0 : activePeriod.hashCode());
 		result = prime * result + ((allAttr == null) ? 0 : allAttr.hashCode());
+		result = prime * result + ((auditData == null) ? 0 : auditData.hashCode());
 		result = prime * result + ((certificateType == null) ? 0 : certificateType.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((uriPrivateCert == null) ? 0 : uriPrivateCert.hashCode());
@@ -84,10 +108,20 @@ public class Certificate {
 		if (getClass() != obj.getClass())
 			return false;
 		Certificate other = (Certificate) obj;
+		if (activePeriod == null) {
+			if (other.activePeriod != null)
+				return false;
+		} else if (!activePeriod.equals(other.activePeriod))
+			return false;
 		if (allAttr == null) {
 			if (other.allAttr != null)
 				return false;
 		} else if (!allAttr.equals(other.allAttr))
+			return false;
+		if (auditData == null) {
+			if (other.auditData != null)
+				return false;
+		} else if (!auditData.equals(other.auditData))
 			return false;
 		if (certificateType == null) {
 			if (other.certificateType != null)

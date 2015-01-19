@@ -17,6 +17,16 @@ public class Liquidation {
 	private String period;
 
 	private int amount;
+	
+	private boolean closed;
+
+	public boolean isClosed() {
+		return closed;
+	}
+
+	public void setClosed(boolean closed) {
+		this.closed = closed;
+	}
 
 	@ManyToOne
 	@JoinColumn(name = "company_id")
@@ -24,6 +34,17 @@ public class Liquidation {
 
 	@OneToMany(mappedBy="liquidation", cascade=CascadeType.ALL)
 	private Set<LiquidationFile> files;
+	
+	@Embedded
+	private AuditData auditData;
+	
+	public AuditData getAuditData() {
+		return auditData;
+	}
+
+	public void setAuditData(AuditData auditData) {
+		this.auditData = auditData;
+	}
 
 	public Integer getId() {
 		return id;
@@ -78,6 +99,8 @@ public class Liquidation {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + amount;
+		result = prime * result + ((auditData == null) ? 0 : auditData.hashCode());
+		result = prime * result + (closed ? 1231 : 1237);
 		result = prime * result + ((company == null) ? 0 : company.hashCode());
 		result = prime * result + ((files == null) ? 0 : files.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -96,6 +119,13 @@ public class Liquidation {
 			return false;
 		Liquidation other = (Liquidation) obj;
 		if (amount != other.amount)
+			return false;
+		if (auditData == null) {
+			if (other.auditData != null)
+				return false;
+		} else if (!auditData.equals(other.auditData))
+			return false;
+		if (closed != other.closed)
 			return false;
 		if (company == null) {
 			if (other.company != null)

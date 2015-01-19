@@ -16,6 +16,28 @@ public class Token {
 	@ManyToOne
 	@JoinColumn(name = "token_type_id")
 	private TokenType tokenType;
+	
+	@Embedded
+	private AuditData auditData;
+	
+	@Embedded
+	private Period activePeriod;
+	
+	public Period getActivePeriod() {
+		return activePeriod;
+	}
+
+	public void setActivePeriod(Period activePeriod) {
+		this.activePeriod = activePeriod;
+	}
+
+	public AuditData getAuditData() {
+		return auditData;
+	}
+
+	public void setAuditData(AuditData auditData) {
+		this.auditData = auditData;
+	}
 
 	public Integer getId() {
 		return id;
@@ -45,6 +67,8 @@ public class Token {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((activePeriod == null) ? 0 : activePeriod.hashCode());
+		result = prime * result + ((auditData == null) ? 0 : auditData.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((tokenNumber == null) ? 0 : tokenNumber.hashCode());
 		result = prime * result + ((tokenType == null) ? 0 : tokenType.hashCode());
@@ -60,6 +84,16 @@ public class Token {
 		if (getClass() != obj.getClass())
 			return false;
 		Token other = (Token) obj;
+		if (activePeriod == null) {
+			if (other.activePeriod != null)
+				return false;
+		} else if (!activePeriod.equals(other.activePeriod))
+			return false;
+		if (auditData == null) {
+			if (other.auditData != null)
+				return false;
+		} else if (!auditData.equals(other.auditData))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;

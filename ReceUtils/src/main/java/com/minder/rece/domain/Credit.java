@@ -18,6 +18,17 @@ public class Credit {
 	@ManyToOne
 	@JoinColumn(name = "business_plan_id")
 	private BusinessPlan businessPlan;
+	
+	@Embedded
+	private AuditData auditData;
+	
+	public AuditData getAuditData() {
+		return auditData;
+	}
+
+	public void setAuditData(AuditData auditData) {
+		this.auditData = auditData;
+	}
 
 	public Integer getId() {
 		return id;
@@ -56,6 +67,7 @@ public class Credit {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + amount;
+		result = prime * result + ((auditData == null) ? 0 : auditData.hashCode());
 		result = prime * result + ((businessPlan == null) ? 0 : businessPlan.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + remainingAmount;
@@ -72,6 +84,11 @@ public class Credit {
 			return false;
 		Credit other = (Credit) obj;
 		if (amount != other.amount)
+			return false;
+		if (auditData == null) {
+			if (other.auditData != null)
+				return false;
+		} else if (!auditData.equals(other.auditData))
 			return false;
 		if (businessPlan == null) {
 			if (other.businessPlan != null)

@@ -16,6 +16,17 @@ public class Language {
 
 	@Column(name="uri_app_labels")
 	private String uriAppLabels;
+	
+	@Embedded
+	private AuditData auditData;
+	
+	public AuditData getAuditData() {
+		return auditData;
+	}
+
+	public void setAuditData(AuditData auditData) {
+		this.auditData = auditData;
+	}
 
 	public Integer getId() {
 		return id;
@@ -53,6 +64,7 @@ public class Language {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((auditData == null) ? 0 : auditData.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -69,6 +81,11 @@ public class Language {
 		if (getClass() != obj.getClass())
 			return false;
 		Language other = (Language) obj;
+		if (auditData == null) {
+			if (other.auditData != null)
+				return false;
+		} else if (!auditData.equals(other.auditData))
+			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;

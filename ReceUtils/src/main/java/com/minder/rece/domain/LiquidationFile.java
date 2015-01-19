@@ -30,6 +30,17 @@ public class LiquidationFile {
 	@ManyToOne
 	@JoinColumn(name = "file_split_and_sign_configuration_id")
 	private FileSplitAndSignConfiguration fileSplitAndSignConfiguration;
+	
+	@Embedded
+	private AuditData auditData;
+	
+	public AuditData getAuditData() {
+		return auditData;
+	}
+
+	public void setAuditData(AuditData auditData) {
+		this.auditData = auditData;
+	}
 
 	public FileSplitAndSignConfiguration getFileSplitAndSignConfiguration() {
 		return fileSplitAndSignConfiguration;
@@ -91,6 +102,7 @@ public class LiquidationFile {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((auditData == null) ? 0 : auditData.hashCode());
 		result = prime * result + ((companySigner == null) ? 0 : companySigner.hashCode());
 		result = prime * result
 				+ ((fileSplitAndSignConfiguration == null) ? 0 : fileSplitAndSignConfiguration.hashCode());
@@ -111,6 +123,11 @@ public class LiquidationFile {
 		if (getClass() != obj.getClass())
 			return false;
 		LiquidationFile other = (LiquidationFile) obj;
+		if (auditData == null) {
+			if (other.auditData != null)
+				return false;
+		} else if (!auditData.equals(other.auditData))
+			return false;
 		if (companySigner == null) {
 			if (other.companySigner != null)
 				return false;

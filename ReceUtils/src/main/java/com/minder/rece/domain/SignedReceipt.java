@@ -23,6 +23,17 @@ public class SignedReceipt {
 	@JoinColumn(name = "signer_id")
 	private Signer signer;
 	
+	@Embedded
+	private AuditData auditData;
+	
+	public AuditData getAuditData() {
+		return auditData;
+	}
+
+	public void setAuditData(AuditData auditData) {
+		this.auditData = auditData;
+	}
+	
 	public String getIpWhereSigned() {
 		return ipWhereSigned;
 	}
@@ -67,6 +78,7 @@ public class SignedReceipt {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((auditData == null) ? 0 : auditData.hashCode());
 		result = prime * result + ((browserWhereSigned == null) ? 0 : browserWhereSigned.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((ipWhereSigned == null) ? 0 : ipWhereSigned.hashCode());
@@ -84,6 +96,11 @@ public class SignedReceipt {
 		if (getClass() != obj.getClass())
 			return false;
 		SignedReceipt other = (SignedReceipt) obj;
+		if (auditData == null) {
+			if (other.auditData != null)
+				return false;
+		} else if (!auditData.equals(other.auditData))
+			return false;
 		if (browserWhereSigned == null) {
 			if (other.browserWhereSigned != null)
 				return false;

@@ -18,10 +18,20 @@ public class Holding {
 
 	@Column(name="unique_holding_key")
 	private String uniqueHoldingKey;
+	
+	private boolean sharingCredit;
 
 	@ManyToOne
 	@JoinColumn(name = "country_id")
 	private Country country;
+
+	public boolean isSharingCredit() {
+		return sharingCredit;
+	}
+
+	public void setSharingCredit(boolean sharingCredit) {
+		this.sharingCredit = sharingCredit;
+	}
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "holding_id")
@@ -29,6 +39,17 @@ public class Holding {
 
 	@OneToMany(mappedBy = "holding", cascade = CascadeType.ALL)
 	private Set<Company> companies;
+	
+	@Embedded
+	private AuditData auditData;
+	
+	public AuditData getAuditData() {
+		return auditData;
+	}
+
+	public void setAuditData(AuditData auditData) {
+		this.auditData = auditData;
+	}
 
 	public Integer getId() {
 		return id;
@@ -91,11 +112,13 @@ public class Holding {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((auditData == null) ? 0 : auditData.hashCode());
 		result = prime * result + ((companies == null) ? 0 : companies.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((credits == null) ? 0 : credits.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + (sharingCredit ? 1231 : 1237);
 		result = prime * result + ((uniqueHoldingKey == null) ? 0 : uniqueHoldingKey.hashCode());
 		return result;
 	}
@@ -113,6 +136,11 @@ public class Holding {
 			if (other.address != null)
 				return false;
 		} else if (!address.equals(other.address))
+			return false;
+		if (auditData == null) {
+			if (other.auditData != null)
+				return false;
+		} else if (!auditData.equals(other.auditData))
 			return false;
 		if (companies == null) {
 			if (other.companies != null)
@@ -138,6 +166,8 @@ public class Holding {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
+			return false;
+		if (sharingCredit != other.sharingCredit)
 			return false;
 		if (uniqueHoldingKey == null) {
 			if (other.uniqueHoldingKey != null)

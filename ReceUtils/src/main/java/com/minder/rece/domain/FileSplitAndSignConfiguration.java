@@ -55,6 +55,17 @@ public class FileSplitAndSignConfiguration {
 	@ManyToOne
 	@JoinColumn(name = "company_id")
 	private Company company;
+	
+	@Embedded
+	private AuditData auditData;
+	
+	public AuditData getAuditData() {
+		return auditData;
+	}
+
+	public void setAuditData(AuditData auditData) {
+		this.auditData = auditData;
+	}
 
 	public Integer getId() {
 		return id;
@@ -244,6 +255,7 @@ public class FileSplitAndSignConfiguration {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((auditData == null) ? 0 : auditData.hashCode());
 		result = prime * result + ((company == null) ? 0 : company.hashCode());
 		result = prime * result + (defaultConfiguration ? 1231 : 1237);
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
@@ -279,6 +291,11 @@ public class FileSplitAndSignConfiguration {
 		if (getClass() != obj.getClass())
 			return false;
 		FileSplitAndSignConfiguration other = (FileSplitAndSignConfiguration) obj;
+		if (auditData == null) {
+			if (other.auditData != null)
+				return false;
+		} else if (!auditData.equals(other.auditData))
+			return false;
 		if (company == null) {
 			if (other.company != null)
 				return false;

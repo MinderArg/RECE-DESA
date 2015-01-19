@@ -17,6 +17,28 @@ public class HeadquarterAssignment {
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
+	
+	@Embedded
+	private Period activePeriod;
+
+	@Embedded
+	private AuditData auditData;
+	
+	public Period getActivePeriod() {
+		return activePeriod;
+	}
+
+	public void setActivePeriod(Period activePeriod) {
+		this.activePeriod = activePeriod;
+	}
+	
+	public AuditData getAuditData() {
+		return auditData;
+	}
+
+	public void setAuditData(AuditData auditData) {
+		this.auditData = auditData;
+	}
 
 	public Employee getEmployee() {
 		return employee;
@@ -46,6 +68,8 @@ public class HeadquarterAssignment {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((activePeriod == null) ? 0 : activePeriod.hashCode());
+		result = prime * result + ((auditData == null) ? 0 : auditData.hashCode());
 		result = prime * result + ((employee == null) ? 0 : employee.hashCode());
 		result = prime * result + ((headquarter == null) ? 0 : headquarter.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -61,6 +85,16 @@ public class HeadquarterAssignment {
 		if (getClass() != obj.getClass())
 			return false;
 		HeadquarterAssignment other = (HeadquarterAssignment) obj;
+		if (activePeriod == null) {
+			if (other.activePeriod != null)
+				return false;
+		} else if (!activePeriod.equals(other.activePeriod))
+			return false;
+		if (auditData == null) {
+			if (other.auditData != null)
+				return false;
+		} else if (!auditData.equals(other.auditData))
+			return false;
 		if (employee == null) {
 			if (other.employee != null)
 				return false;
