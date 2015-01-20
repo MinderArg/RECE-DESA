@@ -1,15 +1,12 @@
 package com.minder.rece.domain;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "liquidations")
-public class Liquidation implements Serializable{
-
-	private static final long serialVersionUID = 751782560682342508L;
+public class Liquidation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -105,6 +102,7 @@ public class Liquidation implements Serializable{
 		result = prime * result + ((auditData == null) ? 0 : auditData.hashCode());
 		result = prime * result + (closed ? 1231 : 1237);
 		result = prime * result + ((company == null) ? 0 : company.hashCode());
+		result = prime * result + ((files == null) ? 0 : files.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((period == null) ? 0 : period.hashCode());
@@ -133,6 +131,11 @@ public class Liquidation implements Serializable{
 			if (other.company != null)
 				return false;
 		} else if (!company.equals(other.company))
+			return false;
+		if (files == null) {
+			if (other.files != null)
+				return false;
+		} else if (!files.equals(other.files))
 			return false;
 		if (id == null) {
 			if (other.id != null)

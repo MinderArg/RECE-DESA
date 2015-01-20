@@ -1,15 +1,11 @@
 package com.minder.rece.domain;
 
 
-import java.io.Serializable;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "liquidation_files")
-public class LiquidationFile implements Serializable{
-
-	private static final long serialVersionUID = 2466869008615855808L;
+public class LiquidationFile {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

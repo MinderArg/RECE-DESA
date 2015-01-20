@@ -1,14 +1,10 @@
 package com.minder.rece.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "file_split_and_sign_configurations")
-public class FileSplitAndSignConfiguration implements Serializable{
-
-	private static final long serialVersionUID = -4357902249235640843L;
+@Table(name = "file_split_and_sign_configuration")
+public class FileSplitAndSignConfiguration {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

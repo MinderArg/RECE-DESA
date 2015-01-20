@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class TestQRGenerator {
 	
-	//@Test
+	@Test
 	public void testQRGen() {
 		assertTrue(true);
 	}
