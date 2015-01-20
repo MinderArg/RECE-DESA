@@ -1,12 +1,15 @@
 package com.minder.rece.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "employees")
-public class Employee extends Signer {
+public class Employee extends Signer implements Serializable{
+
+	private static final long serialVersionUID = 7544732389226356426L;
 
 	@Column(name="unique_employee_key")
 	private String uniqueEmployeeKey;
@@ -82,7 +85,6 @@ public class Employee extends Signer {
 		int result = super.hashCode();
 		result = prime * result + ((corporateEmail == null) ? 0 : corporateEmail.hashCode());
 		result = prime * result + ((employeeFileId == null) ? 0 : employeeFileId.hashCode());
-		result = prime * result + ((headquarterAssignments == null) ? 0 : headquarterAssignments.hashCode());
 		result = prime * result + ((mobilePhone == null) ? 0 : mobilePhone.hashCode());
 		result = prime * result + ((tokens == null) ? 0 : tokens.hashCode());
 		result = prime * result + ((uniqueEmployeeKey == null) ? 0 : uniqueEmployeeKey.hashCode());
@@ -107,11 +109,6 @@ public class Employee extends Signer {
 			if (other.employeeFileId != null)
 				return false;
 		} else if (!employeeFileId.equals(other.employeeFileId))
-			return false;
-		if (headquarterAssignments == null) {
-			if (other.headquarterAssignments != null)
-				return false;
-		} else if (!headquarterAssignments.equals(other.headquarterAssignments))
 			return false;
 		if (mobilePhone == null) {
 			if (other.mobilePhone != null)

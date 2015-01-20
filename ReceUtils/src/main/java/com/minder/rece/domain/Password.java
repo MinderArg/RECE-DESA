@@ -1,10 +1,14 @@
 package com.minder.rece.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "passwords")
-public class Password {
+public class Password implements Serializable{
+
+	private static final long serialVersionUID = 8508174265513557421L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

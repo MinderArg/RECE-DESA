@@ -1,13 +1,16 @@
 package com.minder.rece.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable{
 	
+	private static final long serialVersionUID = -7724052723190456134L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;

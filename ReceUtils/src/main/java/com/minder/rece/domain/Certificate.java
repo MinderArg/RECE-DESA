@@ -1,11 +1,15 @@
 package com.minder.rece.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "certificates")
-public class Certificate {
+public class Certificate implements Serializable{
 	
+	private static final long serialVersionUID = -2593010304916265172L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;

@@ -1,10 +1,14 @@
 package com.minder.rece.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "company_signers")
-public class CompanySigner extends Signer {
+public class CompanySigner extends Signer implements Serializable{
+
+	private static final long serialVersionUID = 7559663181834044330L;
 
 	@Column(name="uri_signature")
 	private String uriSignature;

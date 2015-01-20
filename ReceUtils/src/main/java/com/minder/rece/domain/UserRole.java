@@ -1,12 +1,15 @@
 package com.minder.rece.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "user_roles")
-public class UserRole {
+public class UserRole implements Serializable{
+
+	private static final long serialVersionUID = 5474144846172724286L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

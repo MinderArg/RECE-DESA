@@ -1,12 +1,15 @@
 package com.minder.rece.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "companies")
-public class Company {
+public class Company implements Serializable{
+
+	private static final long serialVersionUID = 7176893578510300796L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +29,7 @@ public class Company {
 	@JoinColumn(name = "holding_id")
 	private Holding holding;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.DETACH)
 	@JoinColumn(name = "company_id")
 	private Set<AvailableCredit> availableCredits;
 	

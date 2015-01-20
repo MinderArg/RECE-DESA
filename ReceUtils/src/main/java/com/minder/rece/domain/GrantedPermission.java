@@ -1,11 +1,15 @@
 package com.minder.rece.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "granted_permissions")
-public class GrantedPermission {
+public class GrantedPermission implements Serializable{
 	
+	private static final long serialVersionUID = -6903736630579550833L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;

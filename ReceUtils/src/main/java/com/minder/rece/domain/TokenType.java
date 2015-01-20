@@ -1,10 +1,14 @@
 package com.minder.rece.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "token_types")
-public class TokenType {
+public class TokenType implements Serializable{
+
+	private static final long serialVersionUID = -2073210000944682851L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
