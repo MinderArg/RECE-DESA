@@ -56,19 +56,14 @@ public class CRUDTest {
 		
 		Transaction tx = session.beginTransaction();
 
-		System.out.println("Saving...");
 		save();
-		System.out.println("Saved.");
         session.flush();
 		tx.commit();
 		
 		List<Company> results = session.createCriteria(Company.class).add(Restrictions.eq("name", "Marvel")).list();
 		if(!results.isEmpty()){
 			
-			System.out.println("Company found.");
 			Company foundCompany = results.get(0);
-			System.out.println(foundCompany.getName());
-			System.out.println(foundCompany.getHolding().getName());
 			
 			companyB.setId(foundCompany.getId());
 			
@@ -83,12 +78,12 @@ public class CRUDTest {
 			session.getTransaction().rollback();
 	    	System.out.println("Transaction rollbacked!");
 		}
-    	System.out.println("Deleting tables...");
+    	//System.out.println("Deleting tables...");
 		deleteTables();
-    	System.out.println("Tables deleted.");
-    	System.out.println("Closing session...");
+    	//System.out.println("Tables deleted.");
+    	//System.out.println("Closing session...");
 		session.close();
-    	System.out.println("Session closed!");
+    	//System.out.println("Session closed!");
 	}
 
 	private void save() {
