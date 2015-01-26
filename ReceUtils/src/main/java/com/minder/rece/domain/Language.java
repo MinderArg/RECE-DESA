@@ -1,10 +1,14 @@
 package com.minder.rece.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "languages")
-public class Language {
+public class Language implements Serializable{
+
+	private static final long serialVersionUID = 6141946192292287248L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

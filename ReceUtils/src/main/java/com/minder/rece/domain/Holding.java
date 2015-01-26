@@ -1,12 +1,15 @@
 package com.minder.rece.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "holdings")
-public class Holding {
+public class Holding implements Serializable{
+
+	private static final long serialVersionUID = 853482093156228575L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,14 +28,6 @@ public class Holding {
 	@JoinColumn(name = "country_id")
 	private Country country;
 
-	public boolean isSharingCredit() {
-		return sharingCredit;
-	}
-
-	public void setSharingCredit(boolean sharingCredit) {
-		this.sharingCredit = sharingCredit;
-	}
-
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "holding_id")
 	private Set<Credit> credits;
@@ -49,6 +44,14 @@ public class Holding {
 
 	public void setAuditData(AuditData auditData) {
 		this.auditData = auditData;
+	}
+
+	public boolean isSharingCredit() {
+		return sharingCredit;
+	}
+
+	public void setSharingCredit(boolean sharingCredit) {
+		this.sharingCredit = sharingCredit;
 	}
 
 	public Integer getId() {
@@ -113,7 +116,6 @@ public class Holding {
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((auditData == null) ? 0 : auditData.hashCode());
-		result = prime * result + ((companies == null) ? 0 : companies.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((credits == null) ? 0 : credits.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -141,11 +143,6 @@ public class Holding {
 			if (other.auditData != null)
 				return false;
 		} else if (!auditData.equals(other.auditData))
-			return false;
-		if (companies == null) {
-			if (other.companies != null)
-				return false;
-		} else if (!companies.equals(other.companies))
 			return false;
 		if (country == null) {
 			if (other.country != null)

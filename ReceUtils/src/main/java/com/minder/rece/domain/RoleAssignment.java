@@ -1,11 +1,15 @@
 package com.minder.rece.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "role_assignments")
-public class RoleAssignment{
+public class RoleAssignment implements Serializable{
 	
+	private static final long serialVersionUID = 836783182808046505L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;

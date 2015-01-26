@@ -1,10 +1,14 @@
 package com.minder.rece.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "credits")
-public class Credit {
+public class Credit implements Serializable{
+
+	private static final long serialVersionUID = 1685211391826653659L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
