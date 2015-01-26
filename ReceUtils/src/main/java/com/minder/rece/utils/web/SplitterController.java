@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.minder.rece.utils.certificate.Encrypter;
 import com.minder.rece.utils.pdf.RecePDF;
 import com.minder.rece.utils.tools.Tools;
 

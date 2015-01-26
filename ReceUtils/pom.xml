@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
-			<version>3.2.13.RELEASE</version>
+			<version>4.0.3.RELEASE</version>
 		</dependency>
 
 		<!-- PDFBox -->
@@ -90,7 +90,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.3.7.Final</version>
+			<version>4.3.8.Final</version>
 		</dependency>
 
 		<!-- Hibernate -->

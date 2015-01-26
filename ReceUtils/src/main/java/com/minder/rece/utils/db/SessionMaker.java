@@ -31,5 +31,10 @@ public class SessionMaker {
     	
     	return sessionFactory.openSession();
     }
+    
+    public static SessionFactory getSessionFactory(){
+    	configureSessionFactory();
+    	return sessionFactory;
+    }
 
 }
