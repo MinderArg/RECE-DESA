@@ -2,13 +2,17 @@ package com.minder.rece.persistence;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.hibernate.LockOptions;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.minder.rece.domain.CertificateType;
 
 @SuppressWarnings("unchecked")
 public abstract class BaseDaoHibernate<T extends Serializable, E> implements BaseDao<T, E> {
@@ -19,19 +23,8 @@ public abstract class BaseDaoHibernate<T extends Serializable, E> implements Bas
 	@Transactional
 	public void deleteAll(final Collection<T> instances) throws Exception {
 		try {
-			//TODO: Implement it!
-			//getHibernateTemplate().deleteAll(instances);
-		} catch (final Exception e) {
-			throw e;
-		}
-	}
-	
-	@Transactional
-	public int bulkUpdate(final String query) throws Exception {
-		try {
-			//TODO: Implement it!
-			return 0;
-			//return getHibernateTemplate().bulkUpdate(query);
+			for (Iterator<T> iterator = instances.iterator(); iterator.hasNext();)
+				sessionFactory.getCurrentSession().delete(iterator.next());
 		} catch (final Exception e) {
 			throw e;
 		}
@@ -104,10 +97,8 @@ public abstract class BaseDaoHibernate<T extends Serializable, E> implements Bas
 	@Transactional
 	public List<T> findByExample(final T instance) throws Exception {
 		try {
-			//TODO: Implement it!
-			return null;
-			//final List<T> results = getHibernateTemplate().findByExample(instance);
-			//return results;
+			final List<T> result = sessionFactory.getCurrentSession().createCriteria(CertificateType.class).add(Example.create(instance)).list();
+			return result;
 		} catch (final Exception e) {
 			throw e;
 		}
@@ -127,17 +118,17 @@ public abstract class BaseDaoHibernate<T extends Serializable, E> implements Bas
 	public List<Map<String, Object>> findMapByQuery(final String queryString)
 			throws Exception {
 		try {
-			//TODO: Implement it!
-			return null;
-			//final List<Map<String, Object>> results = (List<Map<String, Object>>) getHibernateTemplate().find(queryString);
-			//return results;
+			final List<Map<String, Object>> results = (List<Map<String, Object>>) sessionFactory.getCurrentSession().createQuery(queryString);
+			return results;
 		} catch (final Exception e) {
 			throw e;
 		}
 	}
 	
 	@Transactional
-	public abstract List<T> findAll() throws Exception;
+	public List<T> findAll() throws Exception {
+		return sessionFactory.getCurrentSession().createCriteria(CertificateType.class).list();
+	}
 
 	@Transactional
 	public abstract T findById(E id) throws Exception;

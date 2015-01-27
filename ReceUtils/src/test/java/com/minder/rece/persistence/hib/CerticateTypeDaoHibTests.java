@@ -1,4 +1,4 @@
-package com.minder.rece.persistence.dao;
+package com.minder.rece.persistence.hib;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.minder.rece.domain.CertificateType;
+import com.minder.rece.persistence.CertificateTypeDao;
 
 public class CerticateTypeDaoHibTests {
 	

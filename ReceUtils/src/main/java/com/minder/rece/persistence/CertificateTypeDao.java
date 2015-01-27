@@ -1,4 +1,4 @@
-package com.minder.rece.persistence.dao;
+package com.minder.rece.persistence;
 
 import java.util.List;
 

@@ -20,6 +20,7 @@ public class SessionMaker {
          
         Properties properties = configuration.getProperties();
          
+        // TODO: Reemplazar el ServiceRegistryBuilder (deprecated)
         serviceRegistry = new ServiceRegistryBuilder().applySettings(properties).buildServiceRegistry();         
         sessionFactory = configuration.buildSessionFactory(serviceRegistry); 
          

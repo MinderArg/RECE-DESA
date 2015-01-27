@@ -8,8 +8,6 @@ import java.util.Map;
 public interface BaseDao<T extends Serializable, E> {
 	public void deleteAll(Collection<T> instances) throws Exception;
 
-	public int bulkUpdate(String query) throws Exception;
-
 	public E save(T instance) throws Exception;
 
 	public void saveOrUpdate(T instance) throws Exception;
